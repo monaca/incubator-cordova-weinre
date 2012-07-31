@@ -623,6 +623,7 @@ WebInspector.windowResize = function(event)
     this.drawer.resize();
 }
 
+/*
 WebInspector.windowFocused = function(event)
 {
     // Fires after blur, so when focusing on either the main inspector
@@ -640,6 +641,7 @@ WebInspector.windowBlurred = function(event)
     if (event.target.document.nodeType === Node.DOCUMENT_NODE)
         document.body.addStyleClass("inactive");
 }
+*/
 
 WebInspector.focusChanged = function(event)
 {
