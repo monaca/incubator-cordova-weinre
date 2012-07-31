@@ -54,10 +54,10 @@ module.exports = class RemotePanel extends WebInspector.Panel
         @targetList = new TargetList()
         @clientList = new ClientList()
         div.appendChild @targetList.getElement()
-        div.appendChild @clientList.getElement()
-        @serverProperties = DT.DIV($className: "weinreServerProperties")
-        div.appendChild DT.H1("Server Properties")
-        div.appendChild @serverProperties
+#        div.appendChild @clientList.getElement()
+#        @serverProperties = DT.DIV($className: "weinreServerProperties")
+#        div.appendChild DT.H1("Server Properties")
+#        div.appendChild @serverProperties
         @element.appendChild div
         @reset()
 
