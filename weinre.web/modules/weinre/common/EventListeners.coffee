@@ -52,7 +52,7 @@ module.exports = class EventListeners
                 try
                     listener.call null, event
                 catch e
-                    Weinre.logError "#{arguments.callee.name} invocation exception: #{e}"
+                    Weinre.logError "#{arguments.callee.name} invocation exception: #{e.stack}"
                 continue
 
             if typeof listener?.handleEvent isnt "function"
@@ -61,7 +61,7 @@ module.exports = class EventListeners
             try
                 listener.handleEvent.call listener, event
             catch e
-                Weinre.logError "#{arguments.callee.name} invocation exception: #{e}"
+                Weinre.logError "#{arguments.callee.name} invocation exception: #{e.stack}"
 
 #-------------------------------------------------------------------------------
 require("../common/MethodNamer").setNamesForClass(module.exports)

@@ -53,12 +53,22 @@ module.exports = class RemotePanel extends WebInspector.Panel
         div.appendChild icon
         @targetList = new TargetList()
         @clientList = new ClientList()
-        div.appendChild @targetList.getElement()
+#        div.appendChild @targetList.getElement()
 #        div.appendChild @clientList.getElement()
 #        @serverProperties = DT.DIV($className: "weinreServerProperties")
 #        div.appendChild DT.H1("Server Properties")
 #        div.appendChild @serverProperties
         @element.appendChild div
+
+        listdiv = DT.DIV()
+        listdiv.style.position = "absolute"
+        listdiv.style.top = "10px"
+        listdiv.style.right = "10px"
+
+        toolbar = document.getElementById('toolbar')
+        listdiv.appendChild @targetList.getElement()
+        toolbar.appendChild listdiv
+
         @reset()
 
     #---------------------------------------------------------------------------
@@ -169,16 +179,29 @@ class TargetList extends ConnectorList
     constructor: ->
         super "Targets"
 
+        # Add event handler to ulConnectors
+        @ulConnectors.addEventListener "change", ((e) =>
+            channel = @ulConnectors.value
+            @connectToTarget channel, e
+        ), false
+
     #---------------------------------------------------------------------------
     getListItem: (target) ->
         self = this
-        text = target.hostName + " [channel: #{target.channel} id: #{target.id}]" + " - " + target.url
-        item = DT.LI($connectorChannel: target.channel, text)
+
+        parser = document.createElement("a");
+        parser.href = target.url;
+
+        myUrl = parser.pathname
+        index = myUrl.indexOf("/www")
+        if index >= 0
+            myUrl = myUrl.substr(index)
+
+        text = "#{target.channel}: " + myUrl
+        item = DT.OPTION($connectorChannel: target.channel, text)
         item.addStyleClass "weinre-connector-item"
         item.addStyleClass "target"
-        item.addEventListener "click", ((e) ->
-            self.connectToTarget target.channel, e
-        ), false
+        item.value = target.channel
         target.element = item
         item
 

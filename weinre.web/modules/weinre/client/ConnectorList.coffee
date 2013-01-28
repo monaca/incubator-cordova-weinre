@@ -26,11 +26,13 @@ module.exports = class ConnectorList
     constructor: (title) ->
         @connectors = {}
 
-        @noneItem     = dt.LI("none")
-        @ulConnectors = dt.UL(@noneItem)
-        @div          = dt.DIV(dt.H1(title), @ulConnectors)
-
+        @noneItem     = dt.OPTION("Waiting for Monaca Debugger connection...")
         @noneItem.addStyleClass "weinre-connector-item"
+
+        @ulConnectors = dt.SELECT(@noneItem)
+        @ulConnectors.disabled = true
+
+        @div          = dt.DIV(@ulConnectors)
 
     #---------------------------------------------------------------------------
     getElement: ->
@@ -38,20 +40,27 @@ module.exports = class ConnectorList
 
     #---------------------------------------------------------------------------
     add: (connector) ->
-        return if @connectors[connector.channel]
+#        return if @connectors[connector.channel]
 
         @connectors[connector.channel] = connector
 
-        li = @getListItem(connector)
-        li.addStyleClass "weinre-fadeable"
-
+        option = @getListItem(connector)
         @noneItem.style.display = "none"
+        @ulConnectors.disabled = false
+
+        # Remove if there is old one
+        if @ulConnectors.options.length > 0
+            i = 0
+            for o in @ulConnectors.options
+                if o && o.value != undefined && o.value == connector.channel
+                    @ulConnectors.remove i
+                i++
 
         insertionPoint = @getConnectorInsertionPoint(connector)
         unless insertionPoint
-            @ulConnectors.appendChild li
+            @ulConnectors.appendChild option
         else
-            @ulConnectors.insertBefore li, insertionPoint
+            @ulConnectors.insertBefore option, insertionPoint
 
     #---------------------------------------------------------------------------
     get: (channel) ->
@@ -88,20 +97,30 @@ module.exports = class ConnectorList
         connector.closed = true if connector
         delete @connectors[channel]
 
-        if fast
-            @_remove element
-        else
-            @setState element, "closed"
-            element.addStyleClass "weinre-fade"
-
-            window.setTimeout (->
-                self._remove element
-            ), 5000
+        # Quick remove
+        @_remove element
+#        if fast
+#            @_remove element
+#        else
+#            @setState element, "closed"
+#            element.addStyleClass "weinre-fade"
+#
+#            window.setTimeout (->
+#                self._remove element
+#            ), 5000
 
     #---------------------------------------------------------------------------
     _remove: (element) ->
         @ulConnectors.removeChild element
-        @noneItem.style.display = "list-item" if @getConnectors().length == 0
+        if @getConnectors().length == 0
+            @noneItem.style.display = "list-item" 
+            @ulConnectors.disabled = true
+        else
+            @setCurrent @getConnectors()[0].channel
+
+        ev = document.createEvent "HTMLEvents"
+        ev.initEvent "change", true, false
+        @ulConnectors.dispatchEvent ev
 
     #---------------------------------------------------------------------------
     removeAll: () ->
@@ -129,9 +148,11 @@ module.exports = class ConnectorList
         for connector in @getConnectors()
             connector.element.removeStyleClass "current"
 
-        element = @getConnectorElement(channel)
-        return if null == element
-        element.addStyleClass "current"
+        @ulConnectors.value = channel
+
+        #element = @getConnectorElement(channel)
+        #return if null == element
+        #element.addStyleClass "current"
 
     #---------------------------------------------------------------------------
     setState: (channel, state) ->
@@ -146,6 +167,9 @@ module.exports = class ConnectorList
         element.removeStyleClass "connected"
         element.removeStyleClass "not-connected"
         element.addStyleClass state
+
+        if state == "connected"
+            @ulConnectors.value = channel
 
 #-------------------------------------------------------------------------------
 require("../common/MethodNamer").setNamesForClass(module.exports)

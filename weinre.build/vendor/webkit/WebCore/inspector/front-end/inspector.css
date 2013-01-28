@@ -2905,14 +2905,38 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
     display: list-item;
 }
 
-.console-warning-level, .console-error-level, .console-log-level {
-    display: none;
+.filter-all .console-error-level,
+.filter-all .console-warning-level,
+.filter-all .console-log-level,
+.filter-all .console-tip-level {
+  display: block;
 }
 
-.filter-all .console-warning-level, .filter-warnings .console-warning-level,
-.filter-all .console-error-level, .filter-errors .console-error-level,
-.filter-all .console-log-level, .filter-logs .console-log-level {
-    display: block;
+.filter-errors .console-error-level {
+  display: block;
+}
+.filter-errors .console-warning-level,
+.filter-errors .console-log-level,
+.filter-errors .console-tip-level {
+  display: none;
+}
+
+.filter-warnings .console-error-level,
+.filter-warnings .console-warning-level {
+  display: block;
+}
+.filter-warnings .console-log-level,
+.filter-warnings .console-tip-level {
+  display: none;
+}
+
+.filter-logs .console-error-level,
+.filter-logs .console-warning-level,
+.filter-logs .console-log-level {
+  display: block;
+}
+.filter-logs .console-tip-level {
+  display: none;
 }
 
 .console-user-command-result {
