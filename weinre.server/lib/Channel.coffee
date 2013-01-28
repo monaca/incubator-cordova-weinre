@@ -31,15 +31,22 @@ module.exports = utils.registerClass class Channel
     
     #---------------------------------------------------------------------------
     constructor: (@pathPrefix, @id, @remoteAddress, @isClient) ->
-        prefix         = if @isClient then 'c-' else 't-'
-        @name          = "#{prefix}#{utils.getNextSequenceNumber()}"
+        if @isClient
+            @name  = "c-#{utils.getNextSequenceNumber()}"
+            @id = AnonymousId if !@id 
+        else
+            if !@id || @id.indexOf("_") == -1
+                @id = AnonymousId
+                @name = "t-#{utils.getNextSequenceNumber()}"
+            else
+                [@id, @name] = @id.split("_")
+                @name = "t-#{@name}"
+
         @messageQueue  = new MessageQueue
         @isClosed      = false
         @connections   = []
         @isTarget      = !@isClient
         @readTimeout   = utils.options.readTimeout * 1000
-        
-        @id = AnonymousId if !@id 
         
         @description = 
             channel:       @name

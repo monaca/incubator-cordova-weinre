@@ -167,11 +167,12 @@ module.exports = class Console
         Weinre.notImplemented arguments.callee.signature
 
 #-------------------------------------------------------------------------------
-RemoteConsole   = new Console()
-OriginalConsole = window.console
-
-RemoteConsole.__original   = OriginalConsole
-OriginalConsole.__original = OriginalConsole
+# Comment out to cancel console output from weinre
+#RemoteConsole   = new Console()
+#OriginalConsole = window.console
+#
+#RemoteConsole.__original   = OriginalConsole
+#OriginalConsole.__original = OriginalConsole
 
 #-------------------------------------------------------------------------------
 require("../common/MethodNamer").setNamesForClass(module.exports)

@@ -107,6 +107,18 @@ module.exports = class MessageDispatcher
 
         proxy
 
+    handlePostMessage: (event) =>
+        try
+            data = JSON.parse event.data
+        catch error
+            data = event.data
+
+        if data.command == "weinre"
+            @_handleMessage { data: JSON.stringify data.message }
+        if data.command = "resize"
+            WebInspector = @_interfaces["WebInspector"]
+            WebInspector.windowResize()
+
     #---------------------------------------------------------------------------
     _sendMethodInvocation: (intfName, methodName, args) ->
         unless typeof intfName == "string"
@@ -167,7 +179,10 @@ module.exports = class MessageDispatcher
         try
             data = JSON.parse(message.data)
         catch e
+            console.log "Invalid JSON", message.data
             throw new Ex(arguments, "invalid JSON data received: #{e}: '#{message.data}'")
+
+        console.log "Incoming data" + message.data
 
         intfName = data["interface"]
         methodName = data.method
@@ -194,7 +209,7 @@ module.exports = class MessageDispatcher
             method.apply intf, args
         catch e
             if methodName not in skipErrorForMethods
-                Weinre.logError "weinre: invocation exception on #{methodSignature}: " + e
+                Weinre.logError "weinre: invocation exception on #{methodSignature}: " + e.stack
 
         if Verbose
             Weinre.logDebug @constructor.name + "[#{@_url}]: recv #{intfName}.#{methodName}(#{JSON.stringify(args)})"

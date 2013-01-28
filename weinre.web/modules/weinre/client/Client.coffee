@@ -63,6 +63,9 @@ module.exports = class Client
         WebInspector.mainResource = {}
         WebInspector.mainResource.url = location.href
 
+        # Add listener for postMessage from IDE
+        window.addEventListener "message", messageDispatcher.handlePostMessage, false
+
     #---------------------------------------------------------------------------
     _getId: ->
         hash = location.href.split('#')[1]
@@ -87,9 +90,10 @@ module.exports = class Client
 
         WebInspector.addPanelToolbarIcon toolbar, panel, toolbar.childNodes[1]
         WebInspector.panelOrder.unshift WebInspector.panelOrder.pop()
-        WebInspector.currentPanel = panel
+        #WebInspector.currentPanel = panel
+        WebInspector.currentPanel = WebInspector.panels.elements
 
-        toolButtonsToHide = [ 'scripts' ]
+        toolButtonsToHide = [ 'remote', 'scripts', 'timeline', 'network' ]
         for toolButtonToHide in toolButtonsToHide
             continue unless WebInspector.panels[toolButtonToHide]
             continue unless WebInspector.panels[toolButtonToHide].toolbarItem
