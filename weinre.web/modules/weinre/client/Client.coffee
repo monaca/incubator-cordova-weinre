@@ -91,7 +91,7 @@ module.exports = class Client
         WebInspector.addPanelToolbarIcon toolbar, panel, toolbar.childNodes[1]
         WebInspector.panelOrder.unshift WebInspector.panelOrder.pop()
         #WebInspector.currentPanel = panel
-        WebInspector.currentPanel = WebInspector.panels.elements
+        WebInspector.currentPanel = WebInspector.panels.console
 
         toolButtonsToHide = [ 'remote', 'scripts', 'timeline', 'network' ]
         for toolButtonToHide in toolButtonsToHide

@@ -38,6 +38,13 @@ module.exports = class ConnectorList
     getElement: ->
         @div
 
+    refresh: (channel) ->
+        return unless @connectors[channel]
+        option = @getListItem(connectors[channel])
+        element = @getConnectorElement(channel)
+        return unless element
+        element = option
+
     #---------------------------------------------------------------------------
     add: (connector) ->
 #        return if @connectors[connector.channel]

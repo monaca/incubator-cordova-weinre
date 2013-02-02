@@ -114,6 +114,9 @@ module.exports = class MessageDispatcher
             data = event.data
 
         if data.command == "weinre"
+            if data.deviceId && data.deviceName
+                @_interfaces['WebInspector'].panels.remote.setTargetName "t-" + data.deviceId, data.deviceName
+            
             @_handleMessage { data: JSON.stringify data.message }
         if data.command = "resize"
             WebInspector = @_interfaces["WebInspector"]
@@ -181,8 +184,6 @@ module.exports = class MessageDispatcher
         catch e
             console.log "Invalid JSON", message.data
             throw new Ex(arguments, "invalid JSON data received: #{e}: '#{message.data}'")
-
-        console.log "Incoming data" + message.data
 
         intfName = data["interface"]
         methodName = data.method
