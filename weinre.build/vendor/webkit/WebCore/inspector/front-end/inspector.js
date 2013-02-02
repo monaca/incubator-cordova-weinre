@@ -1420,8 +1420,9 @@ WebInspector.linkifyURLAsNode = function(url, linkText, classes, isExternal, too
     classes = (classes ? classes + " " : "");
     classes += isExternal ? "webkit-html-external-link" : "webkit-html-resource-link";
 
-    var a = document.createElement("a");
-    a.href = url;
+    //var a = document.createElement("a");
+    //a.href = url;
+    var a = document.createElement("span");
     a.className = classes;
     if (typeof tooltipText === "undefined")
         a.title = url;
@@ -1515,8 +1516,8 @@ WebInspector.completeURL = function(baseURL, href)
 
 WebInspector.addMainEventListeners = function(doc)
 {
-    doc.defaultView.addEventListener("focus", this.windowFocused.bind(this), false);
-    doc.defaultView.addEventListener("blur", this.windowBlurred.bind(this), false);
+    //doc.defaultView.addEventListener("focus", this.windowFocused.bind(this), false);
+    //doc.defaultView.addEventListener("blur", this.windowBlurred.bind(this), false);
     doc.addEventListener("click", this.documentClick.bind(this), true);
 }
 
