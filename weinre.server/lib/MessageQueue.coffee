@@ -56,8 +56,14 @@ module.exports = utils.registerClass class MessageQueue
     #---------------------------------------------------------------------------
     pullAll: (timeout, callback) ->
         return callback.call(null, null) if @closed
-        return callback.call(null, [])   if @callback
-        
+        if @callback
+            setTimeout () ->
+                try
+                    callback.call(null, [])
+                catch error
+                    console.log "Got error: " + error
+            , timeout
+
         if @messages.length
             callback.call(null, @messages)
             @messages = []
