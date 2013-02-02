@@ -75,10 +75,11 @@ module.exports = class RemotePanel extends WebInspector.Panel
     addClient: (client) ->
         @clientList.add client
 
-
     addTarget: (target) ->
         @targetList.add target
 
+    setTargetName: (device_id, device_name) ->
+        @targetList.setName device_id, device_name
 
     getTarget: (channel) ->
         @targetList.get channel
@@ -185,6 +186,14 @@ class TargetList extends ConnectorList
             @connectToTarget channel, e
         ), false
 
+        @nameList = {}
+        @optionElements = {}
+
+    setName: (device_id, device_name) ->
+        if !@nameList[device_id] || @nameList[device_id] != device_name
+            @nameList[device_id] = device_name
+            @refresh device_id
+
     #---------------------------------------------------------------------------
     getListItem: (target) ->
         self = this
@@ -196,13 +205,20 @@ class TargetList extends ConnectorList
         index = myUrl.indexOf("/www")
         if index >= 0
             myUrl = myUrl.substr(index)
+        
+        name = @nameList[target.channel]
+        name = "Unknown" unless name
 
-        text = "#{target.channel}: " + myUrl
+        text = "#{name}: " + myUrl
+
         item = DT.OPTION($connectorChannel: target.channel, text)
         item.addStyleClass "weinre-connector-item"
         item.addStyleClass "target"
         item.value = target.channel
         target.element = item
+        
+        @optionElements[target.channel] = target.element
+
         item
 
     #---------------------------------------------------------------------------
