@@ -33,7 +33,7 @@ module.exports = class WeinreTargetEventsImpl
         Weinre.logInfo message
 
         Weinre.target.whenBodyReady @, [], ->
-            oldValue = Console.useRemote(true)
+            #oldValue = Console.useRemote(true)
             Weinre.target.setDocument()
             Weinre.wi.TimelineNotify.timelineProfilerWasStopped()
             Weinre.wi.DOMStorage.initialize()
@@ -43,7 +43,7 @@ module.exports = class WeinreTargetEventsImpl
         message = "weinre: target #{targetChannel} disconnected from client " + clientChannel
         Weinre.logInfo message
 
-        oldValue = Console.useRemote(false)
+        #oldValue = Console.useRemote(false)
 
     #---------------------------------------------------------------------------
     sendCallback: (callbackId, result) ->
