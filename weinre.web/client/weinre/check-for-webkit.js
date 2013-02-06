@@ -16,7 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
+/*
 if (!navigator.userAgent.match(/webkit/i)) {
     alert("This web page is only designed to work in WebKit-based browsers.  Sorry.  Best of luck.")
 }
+*/

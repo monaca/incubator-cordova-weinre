@@ -115,7 +115,7 @@ module.exports = class MessageDispatcher
 
         if data.command == "weinre"
             if data.deviceId && data.deviceName
-                @_interfaces['WebInspector'].panels.remote.setTargetName "t-" + data.deviceId, data.deviceName
+                @_interfaces['WebInspector'].panels.remote.setTargetName data.deviceId, data.deviceName
             
             @_handleMessage { data: JSON.stringify data.message }
         if data.command = "resize"
