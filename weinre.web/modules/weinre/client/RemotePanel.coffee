@@ -190,9 +190,9 @@ class TargetList extends ConnectorList
         @optionElements = {}
 
     setName: (device_id, device_name) ->
-        if !@nameList[device_id] || @nameList[device_id] != device_name
-            @nameList[device_id] = device_name
-            @refresh device_id
+        #if !@nameList[device_id] || @nameList[device_id] != device_name
+        @nameList[device_id] = device_name
+        @refresh device_id
 
     #---------------------------------------------------------------------------
     getListItem: (target) ->
@@ -206,8 +206,11 @@ class TargetList extends ConnectorList
         if index >= 0
             myUrl = myUrl.substr(index)
         
-        name = @nameList[target.channel]
-        name = "Unknown" unless name
+        name = "Unknown Device"
+        for device_id of @nameList
+            if target.channel.indexOf(device_id) != -1
+                name = @nameList[device_id]
+                break
 
         text = "#{name}: " + myUrl
 

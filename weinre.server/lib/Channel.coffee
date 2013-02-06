@@ -40,7 +40,7 @@ module.exports = utils.registerClass class Channel
                 @name = "t-#{utils.getNextSequenceNumber()}"
             else
                 [@id, @name] = @id.split("_")
-                @name = "t-#{@name}"
+                @name = "t-#{@name}-#{utils.getNextSequenceNumber()}"
 
         @messageQueue  = new MessageQueue
         @isClosed      = false

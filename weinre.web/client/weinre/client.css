@@ -70,11 +70,11 @@
 
 .weinre-connector-item.target {
     text-decoration: underline;
-    color: blue;
+    /*color: blue;*/
 }
 
 .weinre-connector-item.target.connected {
-    color: #0D0;
+    /*color: #0D0;*/
 }
 
 .weinre-connector-item.closed {
@@ -86,7 +86,7 @@
 }
 
 .weinre-connector-item.connected {
-    color: #0D0;
+    /*background-color: #0D0;*/
 }
 
 .weinre-connector-item.error {

@@ -38,12 +38,15 @@ module.exports = class ConnectorList
     getElement: ->
         @div
 
-    refresh: (channel) ->
-        return unless @connectors[channel]
-        option = @getListItem(connectors[channel])
-        element = @getConnectorElement(channel)
-        return unless element
-        element = option
+    refresh: (device_id) ->
+        for channel of @connectors
+            continue unless @connectors.hasOwnProperty(channel)
+            
+            option = @getListItem(@connectors[channel])
+            element = @getConnectorElement(channel)
+            continue unless element
+
+            element = option
 
     #---------------------------------------------------------------------------
     add: (connector) ->
@@ -104,26 +107,15 @@ module.exports = class ConnectorList
         connector.closed = true if connector
         delete @connectors[channel]
 
-        # Quick remove
-        @_remove element
-#        if fast
-#            @_remove element
-#        else
-#            @setState element, "closed"
-#            element.addStyleClass "weinre-fade"
-#
-#            window.setTimeout (->
-#                self._remove element
-#            ), 5000
+        for i in @ulConnectors.options
+            if typeof i != "undefined" && i.value == channel
+                @ulConnectors.removeChild i
 
-    #---------------------------------------------------------------------------
-    _remove: (element) ->
-        @ulConnectors.removeChild element
         if @getConnectors().length == 0
             @noneItem.style.display = "list-item" 
             @ulConnectors.disabled = true
         else
-            @setCurrent @getConnectors()[0].channel
+            @setCurrent @getConnectors()[@getConnectors().length - 1].channel
 
         ev = document.createEvent "HTMLEvents"
         ev.initEvent "change", true, false

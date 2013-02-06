@@ -49,7 +49,7 @@ var global  = this
 // if require() is already defined, leave
 //----------------------------------------------------------------------------
 if (global.modjewel) {
-    log("modjewel global variable already defined")
+    //log("modjewel global variable already defined")
     return
 }
 
@@ -220,7 +220,7 @@ function require_define(moduleId, prereqs, factory) {
     }
 
     if (hop(ModulePreloadStore, moduleId)) {
-        console.log("modjewel.define(): module '" + moduleId + "' has already been defined")
+        //console.log("modjewel.define(): module '" + moduleId + "' has already been defined")
         return
     }
 

@@ -620,7 +620,8 @@ WebInspector.windowResize = function(event)
 {
     if (this.currentPanel)
         this.currentPanel.resize();
-    this.drawer.resize();
+    if (this.drawer)
+        this.drawer.resize();
 }
 
 /*
