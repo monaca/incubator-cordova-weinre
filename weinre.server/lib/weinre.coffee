@@ -24,6 +24,7 @@ path = require 'path'
 
 _       = require 'underscore'
 express = require 'express'
+https   = require 'https'
 
 utils              = require './utils'
 jsonBodyParser     = require './jsonBodyParser'
@@ -128,8 +129,15 @@ startServer = () ->
     staticCacheOptions =
         maxObjects: 500
         maxLength:  32 * 1024 * 1024
-        
-    app = express.createServer()
+
+    if options.sslKey.length > 0 && options.sslCert.length > 0
+        utils.log "Running in SSL Mode. Key: " + options.sslKey + " Cert: " + options.sslCert
+        serverOptions =
+            key:  fs.readFileSync(options.sslKey)
+            cert: fs.readFileSync(options.sslCert)
+        app = express.createServer(serverOptions)
+    else
+        app = express.createServer()
     
     app.on 'error', (error) ->
         utils.exit "error running server: #{error}"
@@ -158,11 +166,11 @@ startServer = () ->
     app.use express.static(options.staticWebDir)
     
     if options.boundHost == '-all-'
-        utils.log "starting server at http://localhost:#{options.httpPort}"
+        utils.log "starting server at http(s)://localhost:#{options.httpPort}"
         app.listen options.httpPort
         
     else
-        utils.log "starting server at http://#{options.boundHost}:#{options.httpPort}"
+        utils.log "starting server at http(s)://#{options.boundHost}:#{options.httpPort}"
         app.listen options.httpPort, options.boundHost
 
 #-------------------------------------------------------------------------------

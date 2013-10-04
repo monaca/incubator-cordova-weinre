@@ -64,6 +64,13 @@ module.exports = class Target
             if match
                 window.WeinreServerURL = match[1]
                 return
+        
+        if element
+            pattern = /(https:\/\/(.*?)\/)/
+            match = pattern.exec(element.src)
+            if match
+                window.WeinreServerURL = match[1]
+                return
 
         message = "unable to calculate the weinre server url; explicity set the variable window.WeinreServerURL instead"
         alert message

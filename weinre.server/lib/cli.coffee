@@ -32,6 +32,8 @@ optionDefaults =
     verbose:      false
     debug:        false
     readTimeout:  5
+    sslKey:       ''
+    sslCert:      ''
 
 #-------------------------------------------------------------------------------
 exports.run = ->
@@ -44,6 +46,8 @@ exports.run = ->
         readTimeout:  Number
         deathTimeout: Number
         help:         Boolean
+        sslKey:       String
+        sslCert:      String
 
     shortHands =
         '?':  ['--help']
@@ -91,6 +95,8 @@ options:
     --debug        print even more diagnostics           default: #{optionDefaults.debug}
     --readTimeout  seconds to wait for a client message  default: #{optionDefaults.readTimeout}
     --deathTimeout seconds to wait to kill client        default: 3*readTimeout
+    --sslKey       SSL Key
+    --sslCert      SSL Certificate
 
 --boundHost can be an ip address, hostname, or -all-, where -all-
 means binding to all ip address on the current machine'
