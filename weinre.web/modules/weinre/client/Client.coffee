@@ -93,7 +93,7 @@ module.exports = class Client
         #WebInspector.currentPanel = panel
         WebInspector.currentPanel = WebInspector.panels.console
 
-        toolButtonsToHide = [ 'remote', 'scripts', 'timeline', 'network' ]
+        toolButtonsToHide = [ 'remote', 'scripts' ]
         for toolButtonToHide in toolButtonsToHide
             continue unless WebInspector.panels[toolButtonToHide]
             continue unless WebInspector.panels[toolButtonToHide].toolbarItem
