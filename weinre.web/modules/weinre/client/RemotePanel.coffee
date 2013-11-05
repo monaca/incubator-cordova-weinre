@@ -62,7 +62,7 @@ module.exports = class RemotePanel extends WebInspector.Panel
 
         listdiv = DT.DIV()
         listdiv.style.position = "absolute"
-        listdiv.style.top = "10px"
+        listdiv.style.top = "0px"
         listdiv.style.right = "10px"
 
         toolbar = document.getElementById('toolbar')
