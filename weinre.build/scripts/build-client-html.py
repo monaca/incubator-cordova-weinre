@@ -24,6 +24,7 @@ import re
 import sys
 import json
 import optparse
+import datetime
 
 #--------------------------------------------------------------------
 def main():
@@ -48,11 +49,17 @@ def createIndexFile(iFileName, oFileName, moduleDir):
 
     pattern_head_start = re.compile(r"^\s*<meta http-equiv=\"content-type\".*$")
     pattern_head_end   = re.compile(r"^\s*</head>\s$")
+    pattern_javascript = re.compile('^.*<script type="text/javascript" src="(.+)"></script>.*$')
+    pattern_css = re.compile('^.*<link rel="stylesheet" type="text/css" href="(.+)">.*$')
 
     newLines   = []
     foundStart = False
     foundEnd   = False
+
+    cachetime = datetime.datetime.now().strftime("%Y%m%d%H%M%S")    
+
     for line in lines:
+        
         if pattern_head_start.match(line):
             foundStart = True
             newLines.append(line)
@@ -60,27 +67,32 @@ def createIndexFile(iFileName, oFileName, moduleDir):
             newLines.append("<!-- ========== weinre additions: starting ========== -->\n")
             newLines.extend([
                 '<meta http-equiv="X-UA-Compatible" content="chrome=1">\n'
-                '<link rel="shortcut icon" href="../images/weinre-icon-64x64.png">\n',
-                '<title>weinre</title>\n',
-                '<script type="text/javascript" src="weinre/check-for-webkit.js"></script>\n',
-                '<script type="text/javascript" src="weinre/hacks.js"></script>\n',
-                '<script type="text/javascript" src="../modjewel.js"></script>\n',
+                '<title>Monaca Debugger Inspector</title>\n',
+                '<script type="text/javascript" src="weinre/check-for-webkit.js?%s"></script>\n' % cachetime,
+                '<script type="text/javascript" src="weinre/hacks.js?%s"></script>\n' % cachetime,
+                '<script type="text/javascript" src="../modjewel.js?%s"></script>\n' % cachetime,
                 '<script type="text/javascript">modjewel.require("modjewel").warnOnRecursiveRequire(true)</script>\n',
             ])
 
             for module in getModules(moduleDir):
-                newLines.append('<script type="text/javascript" src="../%s"></script>\n' % module)
+                newLines.append('<script type="text/javascript" src="../%s?%s"></script>\n' % (module, cachetime))
 
             newLines.append("<!-- ========== weinre additions: done ========== -->\n")
 
         elif pattern_head_end.match(line):
             foundEnd = True
             newLines.append("<!-- ========== weinre additions: starting ========== -->\n")
-            newLines.append('<link rel="stylesheet" type="text/css" href="weinre/client.css">\n')
-            newLines.append('<script type="text/javascript" src="../interfaces/all-json-idls-min.js"></script>\n')
+            newLines.append('<link rel="stylesheet" type="text/css" href="weinre/client.css?%s">\n' % cachetime)
+            newLines.append('<script type="text/javascript" src="../interfaces/all-json-idls-min.js?%s"></script>\n' % cachetime)
             newLines.append('<script type="text/javascript">modjewel.require("weinre/client/Client").main()</script>\n')
             newLines.append("<!-- ========== weinre additions: done ========== -->\n")
             newLines.append(line)
+        elif pattern_javascript.match(line):
+            result = pattern_javascript.match(line)
+            newLines.append(line.replace(result.group(1), result.group(1) + "?" + cachetime))
+        elif pattern_css.match(line):
+            result = pattern_css.match(line)
+            newLines.append(line.replace(result.group(1), result.group(1) + "?" + cachetime))
 
         else:
             newLines.append(line)

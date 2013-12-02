@@ -125,6 +125,18 @@ module.exports = class Client
         setTimeout (->
             WebInspector.panels.remote.connectionClosed()
             WebInspector.currentPanel = WebInspector.panels.remote
+        
+            # Monaca Fix
+            setInterval (->
+              xhr = new XMLHttpRequest()
+              xhr.timeout = 1 * 1000
+              xhr.onreadystatechange = () ->
+                if (xhr.status == 200) 
+                    location.reload true
+              xhr.open "GET", "/"
+              xhr.send null
+            ), 5000
+     
         ), 1000
 
     #---------------------------------------------------------------------------

@@ -163,6 +163,14 @@ startServer = () ->
     app.use express.errorHandler(dumpExceptions: true)
 
     app.use express.staticCache(staticCacheOptions)
+
+    app.use (req, res, next) ->
+        if req.url != "/client/" && req.url.indexOf "/target" != 0
+            cachetime = 60 * 60 * 24 * 30
+            res.setHeader "Cache-Control", "public, max-age=" + cachetime
+            res.setHeader "Expires", new Date(Date.now() + cachetime * 1000).toUTCString()
+        next()
+
     app.use express.static(options.staticWebDir)
     
     if options.boundHost == '-all-'
