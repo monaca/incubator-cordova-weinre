@@ -165,7 +165,7 @@ startServer = () ->
     app.use express.staticCache(staticCacheOptions)
 
     app.use (req, res, next) ->
-        if req.url != "/client/" && req.url.indexOf "/target" != 0
+        if req.url != "/client/" && req.url != "/target/target-script-min.js"
             cachetime = 60 * 60 * 24 * 30
             res.setHeader "Cache-Control", "public, max-age=" + cachetime
             res.setHeader "Expires", new Date(Date.now() + cachetime * 1000).toUTCString()
