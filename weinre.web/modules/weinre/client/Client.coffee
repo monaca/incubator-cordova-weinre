@@ -131,7 +131,8 @@ module.exports = class Client
               xhr = new XMLHttpRequest()
               xhr.timeout = 1 * 1000
               xhr.onreadystatechange = () ->
-                if (xhr.status == 200) 
+                console.log xhr
+                if (xhr.status && xhr.status == 200) 
                     location.reload true
               xhr.open "GET", "/"
               xhr.send null
