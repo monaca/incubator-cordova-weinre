@@ -129,11 +129,12 @@ module.exports = class Client
             # Monaca Fix
             setInterval (->
               xhr = new XMLHttpRequest()
-              xhr.timeout = 1 * 1000
+              xhr.timeout = 5 * 1000
               xhr.onreadystatechange = () ->
-                console.log xhr
-                if (xhr.status && xhr.status == 200) 
-                    location.reload true
+                if (xhr.readyState == 4 && xhr.status && xhr.status == 200) 
+                    setTimeout (->
+                      location.reload()
+                    ), 10 * 1000
               xhr.open "GET", "/"
               xhr.send null
             ), 5000
