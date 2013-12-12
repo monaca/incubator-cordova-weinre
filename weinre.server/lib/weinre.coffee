@@ -142,6 +142,11 @@ startServer = () ->
     app.on 'error', (error) ->
         utils.exit "error running server: #{error}"
 
+    #app.on 'connection', (socket) ->
+    #    socket.setTimeout 10 * 1000, ->
+    #        socket.destroy()
+    #    socket.setKeepAlive true, 10 * 1000
+
     app.use express.favicon(favIcon)
 
     app.use jsonBodyParser()
@@ -165,6 +170,7 @@ startServer = () ->
     app.use express.staticCache(staticCacheOptions)
 
     app.use (req, res, next) ->
+        res.setHeader "Connection", "close"
         if req.url != "/client/" && req.url != "/target/target-script-min.js"
             cachetime = 60 * 60 * 24 * 30
             res.setHeader "Cache-Control", "public, max-age=" + cachetime
