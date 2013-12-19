@@ -412,6 +412,7 @@ To update the weinre dependencies, use
             <arg file="scripts/build-target-scripts.py"/>
             <arg file="${WEB}"/>
             <arg file="${WEB}/target"/>
+            <arg value="${SERVER_URL}"/>
         </exec>
 
     </target>
@@ -433,6 +434,7 @@ To update the weinre dependencies, use
         <exec executable="python" failonerror="true" failifexecutionfails="true">
             <arg file="scripts/build-client-html.py"/>
             <arg file="${WEB}"/>
+            <arg value="${SERVER_URL}"/>
         </exec>
 
     </target>
@@ -532,7 +534,6 @@ To update the weinre dependencies, use
             <arg value="../archives/${ARCH-SRC}.tar.gz"/>
             <arg value="${ARCH-SRC}"/>
         </exec>
-
     </target>
 
 

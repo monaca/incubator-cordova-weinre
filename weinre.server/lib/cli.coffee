@@ -31,7 +31,7 @@ optionDefaults =
     boundHost:    'localhost'
     verbose:      false
     debug:        false
-    readTimeout:  60
+    readTimeout:  5
     sslKey:       ''
     sslCert:      ''
 

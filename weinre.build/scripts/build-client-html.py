@@ -28,10 +28,11 @@ import datetime
 
 #--------------------------------------------------------------------
 def main():
-    if len(sys.argv) < 2:
-        error("expecting parameters [web directory]")
+    if len(sys.argv) < 3:
+        error("expecting parameters [web directory] [server url]")
 
     webDir = sys.argv[1]
+    serverUrl = sys.argv[2]
 
     iFileName = os.path.join(webDir, "client/inspector.html")
     oFileName = os.path.join(webDir, "client/index.html")
@@ -41,10 +42,10 @@ def main():
     if not os.path.exists(moduleDir): error("module directory does not exist: %s" % moduleDir)
     if not os.path.isdir(moduleDir):  error("module directory is not a directory: %s" % moduleDir)
 
-    createIndexFile(iFileName, oFileName, moduleDir)
+    createIndexFile(iFileName, oFileName, moduleDir, serverUrl)
 
 #--------------------------------------------------------------------
-def createIndexFile(iFileName, oFileName, moduleDir):
+def createIndexFile(iFileName, oFileName, moduleDir, serverUrl):
     with open(iFileName) as iFile: lines = iFile.readlines()
 
     pattern_head_start = re.compile(r"^\s*<meta http-equiv=\"content-type\".*$")
@@ -68,6 +69,7 @@ def createIndexFile(iFileName, oFileName, moduleDir):
             newLines.extend([
                 '<meta http-equiv="X-UA-Compatible" content="chrome=1">\n'
                 '<title>Monaca Debugger Inspector</title>\n',
+                '<script type="text/javascript">window.WeinreServerUrl="%s";</script>\n' % serverUrl,
                 '<script type="text/javascript" src="weinre/check-for-webkit.js?%s"></script>\n' % cachetime,
                 '<script type="text/javascript" src="weinre/hacks.js?%s"></script>\n' % cachetime,
                 '<script type="text/javascript" src="../modjewel.js?%s"></script>\n' % cachetime,

@@ -47,7 +47,7 @@ module.exports = class Client
         
         window.addEventListener 'load', Binding(this, 'onLoaded'), false
 
-        messageDispatcher = new MessageDispatcher('../ws/client', @_getId())
+        messageDispatcher = new MessageDispatcher(window.WeinreServerUrl + '/ws/client', @_getId())
         Weinre.messageDispatcher = messageDispatcher
 
         InspectorBackendImpl.setupProxies()
@@ -131,11 +131,11 @@ module.exports = class Client
               xhr = new XMLHttpRequest()
               xhr.timeout = 5 * 1000
               xhr.onreadystatechange = () ->
-                if (xhr.readyState == 4 && xhr.status && xhr.status == 200) 
+                if (xhr.readyState == 4 && xhr.status && xhr.status == 405) 
                     setTimeout (->
                       location.reload()
                     ), 10 * 1000
-              xhr.open "GET", "/"
+              xhr.open "GET", window.WeinreServerUrl + '/ws/client'
               xhr.send null
             ), 5000
      

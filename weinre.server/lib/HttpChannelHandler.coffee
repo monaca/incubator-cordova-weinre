@@ -100,12 +100,13 @@ handleCreate = (pathPrefix, isClient, request, response) ->
     
     remoteAddress = request.connection?.remoteAddress || ""
     
-    channel = new Channel(pathPrefix, id, remoteAddress, isClient)
+    channel = new Channel(pathPrefix, id, remoteAddress, isClient, request)
     
     response.contentType 'application/json'
     response.send JSON.stringify
         channel: channel.name
         id:      channel.id
+#    request.socket.destroy()
 
 #-------------------------------------------------------------------------------
 handleGet = (request, response, channelName) ->
@@ -119,6 +120,7 @@ handleGet = (request, response, channelName) ->
         
         response.contentType 'application/json'
         response.send JSON.stringify(messages)
+#        request.socket.destroy()
 
 #-------------------------------------------------------------------------------
 handlePost = (request, response, channelName) ->
@@ -128,14 +130,17 @@ handlePost = (request, response, channelName) ->
     
     channel.handleMessages(request.body)
     response.send('')
+#    request.socket.destroy()
 
 #-------------------------------------------------------------------------------
 handleOptions = (request, response) ->
     response.send('')
+#    request.socket.destroy()
 
 #-------------------------------------------------------------------------------
 handleError = (request, response, status) ->
     response.send(status)
+#    request.socket.destroy()
 
 #-------------------------------------------------------------------------------
 setCORSHeaders = (request, response) ->

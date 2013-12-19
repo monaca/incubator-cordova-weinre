@@ -29,11 +29,12 @@ import optparse
 def main():
 
     #----------------------------------------------------------------
-    if len(sys.argv) < 3:
-        error("expecting parameters srcDir outputDir")
+    if len(sys.argv) < 4:
+        error("expecting parameters srcDir outputDir serverUrl")
 
     srcDirName  = sys.argv[1]
     oDirName    = sys.argv[2]
+    serverUrl   = sys.argv[3]
 
     if not os.path.exists(srcDirName):  error("source directory not found: '" + srcDirName + "'")
     if not os.path.isdir(srcDirName):   error("source directory not a directory: '" + srcDirName + "'")
@@ -77,14 +78,14 @@ def main():
 
     #----------------------------------------------------------------
     oFileName = os.path.join(oDirName, "target-script.js")
-    writeMergedFile(oFileName, scripts, scriptNames, scriptSrc, True)
+    writeMergedFile(oFileName, scripts, scriptNames, scriptSrc, True, serverUrl)
 
     #----------------------------------------------------------------
     oFileName = os.path.join(oDirName, "target-script-min.js")
-    writeMergedFile(oFileName, scripts, scriptNames, scriptMin, False)
+    writeMergedFile(oFileName, scripts, scriptNames, scriptMin, False, serverUrl)
 
 #--------------------------------------------------------------------
-def writeMergedFile(oFileName, scripts, scriptNames, srcs, useEval):
+def writeMergedFile(oFileName, scripts, scriptNames, srcs, useEval, serverUrl):
     lines = []
     
     licenseFile = os.path.join(os.path.dirname(__file__), "..", "LICENSE-header.js")
@@ -92,6 +93,7 @@ def writeMergedFile(oFileName, scripts, scriptNames, srcs, useEval):
     with open(licenseFile, "r") as iFile:
         lines.append(iFile.read())
             
+    lines.append('window.WeinreServerURL="%s";' % serverUrl)
     lines.append(";(function(){")
 
     for script in scripts:

@@ -30,7 +30,7 @@ AnonymousId = 'anonymous'
 module.exports = utils.registerClass class Channel
     
     #---------------------------------------------------------------------------
-    constructor: (@pathPrefix, @id, @remoteAddress, @isClient) ->
+    constructor: (@pathPrefix, @id, @remoteAddress, @isClient, @request) ->
         if @isClient
             @name  = "c-#{utils.getNextSequenceNumber()}"
             @id = AnonymousId if !@id 
@@ -66,6 +66,7 @@ module.exports = utils.registerClass class Channel
         
         @isClosed = true
         @messageQueue.shutdown()
+        @request.socket.destroy()
 
     #---------------------------------------------------------------------------
     sendCallback: (intfName, callbackId, args...) ->
