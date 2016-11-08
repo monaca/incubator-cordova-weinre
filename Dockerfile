@@ -1,6 +1,6 @@
 From library/debian:wheezy
 
- Use bash instead of sh
+# Use bash instead of sh
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Initial setup
