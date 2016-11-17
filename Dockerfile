@@ -34,5 +34,5 @@ RUN echo "BUILDER: Monaca \n\SERVER_URL: https://debug.monaca.mobi" > /data/wein
 # Build
 RUN cd /data/weinre.build && ant build-archives
 
-ENTRYPOINT find /data; node /data/weinre.server/weinre --boundHost -all- --sslKey /data/ssl/ssl.key --sslCert /data/ssl/ssl.cer
+ENTRYPOINT node /data/weinre.server/weinre --boundHost -all- --sslKey ${SSL_KEY} --sslCert ${SSL_CER}
 
