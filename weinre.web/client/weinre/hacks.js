@@ -41,3 +41,11 @@ function fixToolbarItem() {
 }
 
 })();
+
+
+document.addEventListener('mousedown', function(e) {
+  if(e.button === 1) {
+    e.preventDefault();
+    return false;
+  }
+});

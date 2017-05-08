@@ -51,6 +51,11 @@ module.exports = class RemotePanel extends WebInspector.Panel
         icon = DT.IMG(src: "../images/weinre-icon-128x128.png")
         icon.style.float = "right"
         div.appendChild icon
+
+        div2 = DT.DIV("Debug panel has closed connection. Retrying...")
+        div2.style.fontSize = "200%"
+        div.appendChild div2
+
         @targetList = new TargetList()
         @clientList = new ClientList()
 #        div.appendChild @targetList.getElement()
@@ -62,7 +67,7 @@ module.exports = class RemotePanel extends WebInspector.Panel
 
         listdiv = DT.DIV()
         listdiv.style.position = "absolute"
-        listdiv.style.top = "10px"
+        listdiv.style.top = "0px"
         listdiv.style.right = "10px"
 
         toolbar = document.getElementById('toolbar')

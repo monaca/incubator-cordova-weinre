@@ -75,11 +75,13 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 56px;
+    height: 24px;
     display: -webkit-box;
     padding: 0 5px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(191, 191, 191)), to(rgb(151, 151, 151)));
-    border-bottom: 1px solid rgb(80, 80, 80);
+    /*background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(191, 191, 191)), to(rgb(151, 151, 151)));*/
+    background-color: #ececec;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #ccc;
     -webkit-box-orient: horizontal;
     -webkit-background-origin: padding;
     -webkit-background-clip: padding;
@@ -138,10 +140,7 @@ body.attached.inactive #toolbar {
 }
 
 .toolbar-icon {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    -webkit-background-size: 100% auto;
+    display: none;
 }
 
 body.attached .toolbar-icon {
@@ -268,7 +267,7 @@ body:not(.platform-mac) .toolbar-item.close-left {
 #main {
     position: absolute;
     z-index: 1;
-    top: 56px;
+    top: 24px;
     left: 0;
     right: 0;
     bottom: 0;

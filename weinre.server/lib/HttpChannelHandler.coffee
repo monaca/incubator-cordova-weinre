@@ -143,7 +143,7 @@ setCORSHeaders = (request, response) ->
     return if !origin
     
     response.header 'Access-Control-Allow-Origin',  origin
-    response.header 'Access-Control-Max-Age',       '600'
+    response.header 'Access-Control-Max-Age',       '1728000'
     response.header 'Access-Control-Allow-Methods', 'GET, POST'
 
 #-------------------------------------------------------------------------------

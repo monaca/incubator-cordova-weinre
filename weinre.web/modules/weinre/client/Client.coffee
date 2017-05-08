@@ -93,7 +93,7 @@ module.exports = class Client
         #WebInspector.currentPanel = panel
         WebInspector.currentPanel = WebInspector.panels.console
 
-        toolButtonsToHide = [ 'remote', 'scripts', 'timeline', 'network' ]
+        toolButtonsToHide = [ 'remote', 'scripts' ]
         for toolButtonToHide in toolButtonsToHide
             continue unless WebInspector.panels[toolButtonToHide]
             continue unless WebInspector.panels[toolButtonToHide].toolbarItem
@@ -125,6 +125,20 @@ module.exports = class Client
         setTimeout (->
             WebInspector.panels.remote.connectionClosed()
             WebInspector.currentPanel = WebInspector.panels.remote
+        
+            # Monaca Fix
+            setInterval (->
+              xhr = new XMLHttpRequest()
+              xhr.timeout = 5 * 1000
+              xhr.onreadystatechange = () ->
+                if (xhr.readyState == 4 && xhr.status && xhr.status == 200) 
+                    setTimeout (->
+                      location.reload()
+                    ), 10 * 1000
+              xhr.open "GET", "/"
+              xhr.send null
+            ), 5000
+     
         ), 1000
 
     #---------------------------------------------------------------------------
