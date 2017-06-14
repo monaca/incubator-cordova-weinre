@@ -46,7 +46,7 @@ module.exports = class ConnectorList
             element = @getConnectorElement(channel)
             continue unless element
 
-            element = option
+            element.innerText = option.innerText
 
     #---------------------------------------------------------------------------
     add: (connector) ->
