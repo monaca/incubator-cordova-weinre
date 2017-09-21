@@ -27,7 +27,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-html {
+ html {
     height: 100%;
 }
 
@@ -78,13 +78,16 @@ img {
     height: 24px;
     display: -webkit-box;
     padding: 0 5px;
-    /*background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(191, 191, 191)), to(rgb(151, 151, 151)));*/
-    background-color: #ececec;
-    border-top: 1px solid #aaa;
-    border-bottom: 1px solid #ccc;
+    background-color: #e7e9eb;
     -webkit-box-orient: horizontal;
     -webkit-background-origin: padding;
     -webkit-background-clip: padding;
+}
+
+#toolbar select[disabled] {
+    margin-top: 2px;
+    background-color: #fff;
+    color: #808080;
 }
 
 body.inactive #toolbar {
@@ -114,7 +117,6 @@ body.attached.inactive #toolbar {
 
 .toolbar-item {
     display: -webkit-box;
-    padding: 4px 6px;
     margin: 0;
     background-color: transparent;
     border-style: none;
@@ -122,12 +124,20 @@ body.attached.inactive #toolbar {
     -webkit-box-orient: vertical;
     -webkit-box-align: center;
     -webkit-box-pack: end;
+    margin-bottom: 1px;
 }
 
 .toolbar-item.toggleable.toggled-on {
-    border-width: 0 2px 0 2px;
-    padding: 4px 4px;
-    -webkit-border-image: url(Images/toolbarItemSelected.png) 0 2 0 2;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    height: 23px;
+    line-height: 14px;
+    margin-top: 1px;
+}
+
+.toolbar-item.toggleable.toggled-on > div {
+    margin-top: -1px;
 }
 
 .toolbar-item.flexable-space {
@@ -297,7 +307,6 @@ body.attached #main {
 
 body.drawer-visible #main-status-bar {
     height: 24px;
-    background-image: url(Images/statusbarResizerVertical.png), url(Images/statusbarBackground.png);
     background-repeat: no-repeat, repeat-x;
     background-position: right center, center;
     cursor: row-resize;
@@ -313,7 +322,6 @@ body.drawer-visible #main-panels {
 
 .status-bar {
     background-color: rgb(235, 235, 235);
-    background-image: url(Images/statusbarBackground.png);
     background-repeat: repeat-x;
     white-space: nowrap;
     height: 23px;
@@ -361,7 +369,6 @@ body.drawer-visible #main-panels {
 button.status-bar-item {
     position: relative;
     width: 32px;
-    background-image: url(Images/statusbarButtons.png);
     background-position: 0 0;
 }
 
@@ -1510,7 +1517,7 @@ li.editing .swatch, li.editing .enabled-button,  li.editing-sub-part .delete-but
 }
 
 .pane > .title {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(243, 243, 243)), color-stop(0.05, rgb(243, 243, 243)), color-stop(0.05, rgb(230, 230, 230)), to(rgb(209, 209, 209)));
+    background-color: #e7e9eb;
     height: 20px;
     padding: 0 5px;
     border-top: 1px solid rgb(189, 189, 189);
@@ -1831,18 +1838,18 @@ body.inactive .sidebar {
 }
 
 .resources.panel .sidebar li.selected .selection {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 177, 207)), to(rgb(120, 138, 177)));
+    background: rgb(162, 177, 207);    
     border-top: 1px solid #979797;
     height: 17px;
 }
 
 .resources.panel .sidebar :focus li.selected .selection {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(92, 147, 213)), to(rgb(21, 83, 170)));
+    background: rgb(92, 147, 213);
     border-top: 1px solid rgb(68, 128, 200);
 }
 
 body.inactive .resources.panel .sidebar li.selected .selection {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(180, 180, 180)), to(rgb(138, 138, 138)));
+    background: rgb(180, 180, 180);
     border-top: 1px solid rgb(151, 151, 151);
 }
 
@@ -2001,7 +2008,7 @@ li.selected .base-storage-tree-element-subtitle {
     bottom: 0;
     height: 100%;
     border-top: 0 none transparent;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(0.5, white), color-stop(0.5, rgb(234, 243, 255)), to(rgb(234, 243, 255)));
+    background: white;
     -webkit-background-size: 1px 32px;
 }
 
@@ -2525,8 +2532,8 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
 }
 
 #resources-filter, #console-filter.console-filter-top {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgb(236, 236, 236)), to(rgb(217, 217, 217)));
-    border-bottom: 1px solid rgb(64%, 64%, 64%);
+    background-color: #fff;
+    border-bottom: 1px solid #e8eaed;
     width: 100%;
 }
 
@@ -2535,7 +2542,6 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
 }
 
 #console-filter {
-    margin-top: 1px;
 }
 
 .tabbed-pane {
@@ -2564,7 +2570,7 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
     text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
     vertical-align: middle;
     padding: 3px 7px 2px;
-    height: 21px;
+    height: 20px;
     border: 1px solid transparent;
     border-bottom: none;
 }
@@ -2577,22 +2583,19 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
 
 .scope-bar {
     height: 23px;
-    padding: 2px 10px 0;
     overflow: hidden;
 }
 
 .scope-bar li {
     display: inline-block;
-    margin: 1px 2px 0 0;
     padding: 1px 7px 3px;
     font-size: 11px;
-    line-height: 12px;
-    font-weight: bold;
-    color: rgb(46, 46, 46);
+    height: 22px;
+    color: #333;
     background: transparent;
     text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
-    -webkit-border-radius: 8px;
     vertical-align: middle;
+    line-height: 19px;
 }
 
 .scope-bar-divider {
@@ -2604,18 +2607,16 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
     display: inline-block;
 }
 
-.scope-bar li.selected, .scope-bar li:hover, .scope-bar li:active {
-    color: white;
-    text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
+.scope-bar li.selected, .scope-bar li.selected:hover, .scope-bar li:active {
+    border-bottom: 2px solid #4399fd;
 }
 
 .scope-bar li:hover {
-    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    background-color: #e1e1e1;
 }
 
 .scope-bar li.selected {
-    background: rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5) inset, 0 -1px 1px rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .scope-bar li:active {
@@ -3218,7 +3219,7 @@ body.inactive li.selected .status .bubble {
 .sidebar-tree-item.selected {
     color: white;
     border-top: 1px solid rgb(145, 160, 192);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(162, 177, 207)), to(rgb(120, 138, 177)));
+    background: rgb(162, 177, 207);
     text-shadow: rgba(0, 0, 0, 0.33) 0 1px 0;
     font-weight: bold;
     -webkit-background-origin: padding;
@@ -3227,7 +3228,7 @@ body.inactive li.selected .status .bubble {
 
 :focus .sidebar-tree-item.selected {
     border-top: 1px solid rgb(68, 128, 200);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(92, 147, 213)), to(rgb(21, 83, 170)));
+    background: rgb(92, 147, 213);
 }
 
 body.inactive .sidebar-tree-item.selected {
@@ -3462,7 +3463,7 @@ body.inactive li.selected .bubble.search-matches {
     top: 80px;
     left: 0;
     right: 0;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(253, 253, 253)), to(rgb(213, 213, 213)));
+    background: rgb(253, 253, 253);
     border-top: 1px solid rgb(140, 140, 140);
     border-bottom: 1px solid rgb(115, 115, 115);
     height: 10px;
@@ -3475,7 +3476,7 @@ body.inactive li.selected .bubble.search-matches {
     bottom: 0px;
     left: 0px;
     padding-top: 2px;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(242, 242, 242)), to(rgb(209, 209, 209)));
+    background: rgb(242, 242, 242);
     border-right: 1px solid rgb(163, 163, 163);
 }
 
@@ -3573,11 +3574,7 @@ body.inactive li.selected .bubble.search-matches {
     height: 11px;
     margin: 0 3px 0 5px;
     padding: 0;
-    background-image: url(Images/timelineCheckmarks.png);
-    background-repeat: no-repeat;
-    background-position: 0 -66px;
     vertical-align: -1px;
-    -webkit-appearance: none;
 }
 
 .timeline-category-statusbar-item .timeline-category-checkbox:checked {

@@ -1017,7 +1017,7 @@ String.format = function(format, substitutions, formatters, initialValue, append
 
 function isEnterKey(event) {
     // Check if in IME.
-    return event.keyCode !== 229 && event.keyIdentifier === "Enter";
+    return event.keyCode !== 229 && event.key === "Enter";
 }
 
 
