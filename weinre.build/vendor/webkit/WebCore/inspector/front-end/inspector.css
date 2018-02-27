@@ -7,13 +7,13 @@
  * are met:
  *
  * 1.  Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer. 
+ *     notice, this list of conditions and the following disclaimer.
  * 2.  Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution. 
+ *     documentation and/or other materials provided with the distribution.
  * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
  *     its contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission. 
+ *     from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -27,7 +27,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
- html {
+html {
     height: 100%;
 }
 
@@ -75,17 +75,23 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 24px;
+    height: 28px;
     display: -webkit-box;
-    padding: 0 5px;
-    background-color: #e7e9eb;
+    padding: 4px 5px 0;
+    background-color: #fff;
     -webkit-box-orient: horizontal;
     -webkit-background-origin: padding;
     -webkit-background-clip: padding;
 }
 
-#toolbar select[disabled] {
-    margin-top: 2px;
+#toolbar .weinre-connector-list {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+}
+
+#toolbar select {
+    height: 20px;
     background-color: #fff;
     color: #808080;
 }
@@ -128,9 +134,8 @@ body.attached.inactive #toolbar {
 }
 
 .toolbar-item.toggleable.toggled-on {
-    background-color: #fff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    background-color: #f2f5f9;
+    color: #333;
     height: 23px;
     line-height: 14px;
     margin-top: 1px;
@@ -168,9 +173,9 @@ body.attached .toolbar-item:active .toolbar-icon {
 }
 
 .toolbar-label {
-    font-size: 11px;
+    font-size: 12px;
     font-family: Lucida Grande, sans-serif;
-    text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
+    color: #848687;
 }
 
 .toolbar-item.toggleable:active .toolbar-label {
@@ -277,7 +282,7 @@ body:not(.platform-mac) .toolbar-item.close-left {
 #main {
     position: absolute;
     z-index: 1;
-    top: 24px;
+    top: 28px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -389,7 +394,7 @@ button.status-bar-item.toggled-1 .glyph {
 }
 
 button.status-bar-item.toggled-2 .glyph {
-    background-color: purple;   
+    background-color: purple;
 }
 
 button.status-bar-item:disabled {
@@ -459,7 +464,7 @@ body.port-qt #dock-status-bar-item {
     vertical-align: -1px;
     margin-right: 2px;
 }
-    
+
 #error-count + #warning-count {
     margin-left: 6px;
 }
@@ -540,7 +545,7 @@ body.platform-linux .monospace, body.platform-linux .source-code {
 #console-prompt {
     position: relative;
     padding: 1px 22px 1px 24px;
-    min-height: 16px; 
+    min-height: 16px;
     white-space: pre-wrap;
     -webkit-user-modify: read-write-plaintext-only;
 }
@@ -1377,7 +1382,7 @@ body.inactive .placard.selected {
 .event-bars .event-bar .header .title {
     font-weight: normal;
     color: black;
-    text-shadow: white 0 1px 0; 
+    text-shadow: white 0 1px 0;
 }
 
 .event-bars .event-bar .header .subtitle {
@@ -1444,7 +1449,7 @@ li.editing .swatch, li.editing .enabled-button,  li.editing-sub-part .delete-but
 }
 
 .watch-expressions > li.editing-sub-part .name {
-    display: block; 
+    display: block;
     width: 100%;
 }
 
@@ -1838,7 +1843,7 @@ body.inactive .sidebar {
 }
 
 .resources.panel .sidebar li.selected .selection {
-    background: rgb(162, 177, 207);    
+    background: rgb(162, 177, 207);
     border-top: 1px solid #979797;
     height: 17px;
 }
@@ -2158,7 +2163,7 @@ body.inactive .data-grid th.sort-ascending, body.inactive .data-grid th.sort-des
 .database-query-prompt {
     position: relative;
     padding: 1px 22px 1px 24px;
-    min-height: 16px; 
+    min-height: 16px;
     white-space: pre-wrap;
     -webkit-user-modify: read-write-plaintext-only;
     -webkit-user-select: text;
@@ -2184,7 +2189,7 @@ body.inactive .data-grid th.sort-ascending, body.inactive .data-grid th.sort-des
     position: relative;
     border-bottom: 1px solid rgb(245, 245, 245);
     padding: 1px 22px 1px 24px;
-    min-height: 16px; 
+    min-height: 16px;
 }
 
 .database-user-query::before {
@@ -2532,9 +2537,8 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
 }
 
 #resources-filter, #console-filter.console-filter-top {
-    background-color: #fff;
-    border-bottom: 1px solid #e8eaed;
-    width: 100%;
+    background-color: #f2f5f9;
+    width: calc(100% - 10px);
 }
 
 #console-messages.console-filter-top {
@@ -2542,6 +2546,7 @@ button.enable-toggle-status-bar-item.toggled-on .glyph {
 }
 
 #console-filter {
+    margin: 0 5px;
 }
 
 .tabbed-pane {
@@ -4057,20 +4062,20 @@ li.breakpoint-hit .breakpoint-hit-marker {
     padding: 4px;
     background-color: rgb(203, 226, 255);
     -webkit-border-radius: 7px;
-    border: 2px solid rgb(169, 172, 203); 
-    width: 90%; 
+    border: 2px solid rgb(169, 172, 203);
+    width: 90%;
 }
 
 .source-frame-breakpoint-message {
     background-color: transparent;
-    font-family: Lucida Grande, sans-serif; 
+    font-family: Lucida Grande, sans-serif;
     font-weight: normal;
     font-size: 11px;
     text-align: left;
     text-shadow: none;
     color: rgb(85, 85, 85);
     cursor: default;
-    margin: 0 0 2px 0; 
+    margin: 0 0 2px 0;
 }
 
 #source-frame-breakpoint-condition {
@@ -4128,7 +4133,7 @@ li.breakpoint-hit .breakpoint-hit-marker {
     margin: 0;
     padding: 0;
 }
- 
+
 .workers-list > li {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -4346,4 +4351,29 @@ a.worker-item:hover {
     font-size: 12px;
     font-weight: bold;
     z-index: 10000;
+}
+
+@media (max-width: 600px) {
+    #toolbar {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    #toolbar .weinre-connector-list {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+    }
+
+    #toolbar::-webkit-scrollbar {
+        height: 2px;
+        background: transparent;
+    }
+
+    #toolbar::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 20px;
+        border-radius: 10px;
+    }
 }

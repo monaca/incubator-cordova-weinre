@@ -41,7 +41,7 @@ module.exports = class ConnectorList
     refresh: (device_id) ->
         for channel of @connectors
             continue unless @connectors.hasOwnProperty(channel)
-            
+
             option = @getListItem(@connectors[channel])
             element = @getConnectorElement(channel)
             continue unless element
@@ -112,7 +112,7 @@ module.exports = class ConnectorList
                 @ulConnectors.removeChild i
 
         if @getConnectors().length == 0
-            @noneItem.style.display = "list-item" 
+            @noneItem.style.display = "list-item"
             @ulConnectors.disabled = true
         else
             @setCurrent @getConnectors()[@getConnectors().length - 1].channel

@@ -17,6 +17,35 @@
  * under the License.
 -->
 
+How to Use With Monaca
+----------------------
+For development, after you make changes, run this command to build a new docker container:
+```
+docker build -t weinre-server .
+```
+
+Then we need to stop the currently running container:
+```
+docker stop weinre-server
+```
+
+Finally, we can run our newly built container with the container ID from the first command. Edit the `docker-compose.yml` in the Monaca repository root. Make the following change to the file, so Docker will use your local image instead of the remote one.
+```
+weinre-server:
+# image: docker-registry.monaca.io/weinre-server
+  image: weinre-server
+
+```
+
+Then run the following command (also in the Monaca project root):
+```
+docker-compose up weinre-server
+```
+
+.
+.
+.
+
 weinre is WEb INspector REmote.
 
 Pronounced like the word "winery". Or maybe like the word "weiner".

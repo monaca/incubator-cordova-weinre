@@ -66,9 +66,7 @@ module.exports = class RemotePanel extends WebInspector.Panel
         @element.appendChild div
 
         listdiv = DT.DIV()
-        listdiv.style.position = "absolute"
-        listdiv.style.top = "0px"
-        listdiv.style.right = "10px"
+        listdiv.addStyleClass "weinre-connector-list"
 
         toolbar = document.getElementById('toolbar')
         listdiv.appendChild @targetList.getElement()
@@ -210,7 +208,7 @@ class TargetList extends ConnectorList
         index = myUrl.indexOf("/www")
         if index >= 0
             myUrl = myUrl.substr(index)
-        
+
         name = "Unknown Device"
         for device_id of @nameList
             if target.channel.indexOf(device_id) != -1
@@ -224,7 +222,7 @@ class TargetList extends ConnectorList
         item.addStyleClass "target"
         item.value = target.channel
         target.element = item
-        
+
         @optionElements[target.channel] = target.element
 
         item
