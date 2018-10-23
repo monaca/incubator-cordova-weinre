@@ -27,19 +27,4 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-if (!window.InspectorExtensionRegistry) {
-
-WebInspector.InspectorExtensionRegistryStub = function()
-{
-}
-
-WebInspector.InspectorExtensionRegistryStub.prototype = {
-    getExtensionsAsync: function()
-    {
-    }
-};
-
-InspectorExtensionRegistry = new WebInspector.InspectorExtensionRegistryStub();
-
-}
+window.InspectorExtensionRegistry||(WebInspector.InspectorExtensionRegistryStub=function(){},WebInspector.InspectorExtensionRegistryStub.prototype={getExtensionsAsync:function(){}},InspectorExtensionRegistry=new WebInspector.InspectorExtensionRegistryStub);

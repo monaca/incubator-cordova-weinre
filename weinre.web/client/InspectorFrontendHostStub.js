@@ -16,8 +16,4 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-(function() {
-    var InspectorFrontEndHostImpl = modjewel.require("weinre/client/InspectorFrontendHostImpl")
-    window.InspectorFrontendHost = new InspectorFrontEndHostImpl()
-})()
+!function(){var e=modjewel.require("weinre/client/InspectorFrontendHostImpl");window.InspectorFrontendHost=new e}();

@@ -16,10 +16,4 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
- if (typeof Weinre == "undefined") Weinre = {};
-
- Weinre.Versions = {
-    weinre:   "@WEINRE_VERSION@",
-    build:    "@BUILD_DATE@",
- };
+"undefined"==typeof Weinre&&(Weinre={}),Weinre.Versions={weinre:"@WEINRE_VERSION@",build:"@BUILD_DATE@"};

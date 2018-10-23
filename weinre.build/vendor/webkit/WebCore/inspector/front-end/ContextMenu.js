@@ -27,65 +27,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.ContextMenu = function() {
-    this._items = [];
-    this._handlers = {};
-}
-
-WebInspector.ContextMenu.prototype = {
-    show: function(event)
-    {
-        // Remove trailing separator.
-        while (this._items.length > 0 && !("id" in this._items[this._items.length - 1]))
-            this._items.splice(this._items.length - 1, 1);
-
-        if (this._items.length) {
-            WebInspector._contextMenu = this;
-            InspectorFrontendHost.showContextMenu(event, this._items);
-        }
-        event.stopPropagation();
-    },
-
-    appendItem: function(label, handler, disabled)
-    {
-        var id = this._items.length;
-        this._items.push({type: "item", id: id, label: label, enabled: !disabled});
-        this._handlers[id] = handler;
-    },
-
-    appendCheckboxItem: function(label, handler, checked, disabled)
-    {
-        var id = this._items.length;
-        this._items.push({type: "checkbox", id: id, label: label, checked: !!checked, enabled: !disabled});
-        this._handlers[id] = handler;
-    },
-
-    appendSeparator: function()
-    {
-        // No separator dupes allowed.
-        if (this._items.length === 0)
-            return;
-        if (!("id" in this._items[this._items.length - 1]))
-            return;
-        this._items.push({type: "separator"});
-    },
-
-    _itemSelected: function(id)
-    {
-        if (this._handlers[id])
-            this._handlers[id].call(this);
-    }
-}
-
-WebInspector.contextMenuItemSelected = function(id)
-{
-    if (WebInspector._contextMenu)
-        WebInspector._contextMenu._itemSelected(id);
-}
-
-WebInspector.contextMenuCleared = function()
-{
-    // FIXME: Unfortunately, contextMenuCleared is invoked between show and item selected
-    // so we can't delete last menu object from WebInspector. Fix the contract.
-}
+WebInspector.ContextMenu=function(){this._items=[],this._handlers={}},WebInspector.ContextMenu.prototype={show:function(t){
+// Remove trailing separator.
+for(;0<this._items.length&&!("id"in this._items[this._items.length-1]);)this._items.splice(this._items.length-1,1);this._items.length&&(WebInspector._contextMenu=this,InspectorFrontendHost.showContextMenu(t,this._items)),t.stopPropagation()},appendItem:function(t,e,n){var s=this._items.length;this._items.push({type:"item",id:s,label:t,enabled:!n}),this._handlers[s]=e},appendCheckboxItem:function(t,e,n,s){var i=this._items.length;this._items.push({type:"checkbox",id:i,label:t,checked:!!n,enabled:!s}),this._handlers[i]=e},appendSeparator:function(){
+// No separator dupes allowed.
+0!==this._items.length&&"id"in this._items[this._items.length-1]&&this._items.push({type:"separator"})},_itemSelected:function(t){this._handlers[t]&&this._handlers[t].call(this)}},WebInspector.contextMenuItemSelected=function(t){WebInspector._contextMenu&&WebInspector._contextMenu._itemSelected(t)},WebInspector.contextMenuCleared=function(){
+// FIXME: Unfortunately, contextMenuCleared is invoked between show and item selected
+// so we can't delete last menu object from WebInspector. Fix the contract.
+};

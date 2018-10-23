@@ -26,48 +26,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.WelcomeView = function(identifier, headingText, instructionsText)
-{
-    WebInspector.View.call(this);
-
-    this.element.addStyleClass("panel-enabler-view");
-    this.element.addStyleClass(identifier);
-    this.element.addStyleClass("welcome");
-
-    this.contentElement = document.createElement("div");
-    this.contentElement.className = "panel-enabler-view-content";
-    this.element.appendChild(this.contentElement);
-
-    this.alignerElement = document.createElement("div");
-    this.alignerElement.className = "welcome-instructions-aligner";
-    this.contentElement.appendChild(this.alignerElement);
-
-    this.instructionsElement = document.createElement("div");
-    this.instructionsElement.className = "instructions";
-    this.contentElement.appendChild(this.instructionsElement);
-
-    this.headerElement = document.createElement("h1");
-    this.headerElement.textContent = headingText;
-    this.instructionsElement.appendChild(this.headerElement);
-
-    if (instructionsText)
-        this.addMessage(instructionsText);
-}
-
-WebInspector.WelcomeView.prototype = {
-    addMessage: function(message)
-    {
-        var messageElement = document.createElement("div");
-        messageElement.className = "message";
-        if (typeof message == "string")
-            // Message text can contain <br> tags for better text balancing, so we
-            // put it into elements using 'innerHTML', not 'textContent'.
-            messageElement.innerHTML = message;
-        else
-            messageElement.appendChild(message);
-        this.instructionsElement.appendChild(messageElement);
-    }
-}
-
-WebInspector.WelcomeView.prototype.__proto__ = WebInspector.View.prototype;
+WebInspector.WelcomeView=function(e,t,n){WebInspector.View.call(this),this.element.addStyleClass("panel-enabler-view"),this.element.addStyleClass(e),this.element.addStyleClass("welcome"),this.contentElement=document.createElement("div"),this.contentElement.className="panel-enabler-view-content",this.element.appendChild(this.contentElement),this.alignerElement=document.createElement("div"),this.alignerElement.className="welcome-instructions-aligner",this.contentElement.appendChild(this.alignerElement),this.instructionsElement=document.createElement("div"),this.instructionsElement.className="instructions",this.contentElement.appendChild(this.instructionsElement),this.headerElement=document.createElement("h1"),this.headerElement.textContent=t,this.instructionsElement.appendChild(this.headerElement),n&&this.addMessage(n)},WebInspector.WelcomeView.prototype={addMessage:function(e){var t=document.createElement("div");t.className="message","string"==typeof e?
+// Message text can contain <br> tags for better text balancing, so we
+// put it into elements using 'innerHTML', not 'textContent'.
+t.innerHTML=e:t.appendChild(e),this.instructionsElement.appendChild(t)}},WebInspector.WelcomeView.prototype.__proto__=WebInspector.View.prototype;

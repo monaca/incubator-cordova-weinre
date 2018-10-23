@@ -16,8 +16,4 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-(function() {
-    var InspectorBackendImpl = modjewel.require("weinre/client/InspectorBackendImpl")
-    window.InspectorBackend = new InspectorBackendImpl()
-})()
+!function(){var e=modjewel.require("weinre/client/InspectorBackendImpl");window.InspectorBackend=new e}();

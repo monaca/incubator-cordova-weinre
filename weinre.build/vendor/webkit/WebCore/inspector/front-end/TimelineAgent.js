@@ -27,32 +27,8 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.TimelineAgent = function() {
-    // Not implemented.
+WebInspector.TimelineAgent=function(){
+// Not implemented.
 }
-
 // Must be kept in sync with TimelineItem.h
-WebInspector.TimelineAgent.RecordType = {
-    EventDispatch : 0,
-    Layout : 1,
-    RecalculateStyles : 2,
-    Paint : 3,
-    ParseHTML : 4,
-    TimerInstall : 5,
-    TimerRemove : 6,
-    TimerFire : 7,
-    XHRReadyStateChange : 8,
-    XHRLoad : 9,
-    EvaluateScript : 10,
-    MarkTimeline : 11,
-    ResourceSendRequest : 12,
-    ResourceReceiveResponse : 13,
-    ResourceFinish : 14,
-    FunctionCall : 15,
-    ResourceReceiveData: 16,
-    GCEvent : 17,
-    MarkDOMContentEventType : 18,
-    MarkLoadEventType : 19,
-    ScheduleResourceRequest : 20
-};
+,WebInspector.TimelineAgent.RecordType={EventDispatch:0,Layout:1,RecalculateStyles:2,Paint:3,ParseHTML:4,TimerInstall:5,TimerRemove:6,TimerFire:7,XHRReadyStateChange:8,XHRLoad:9,EvaluateScript:10,MarkTimeline:11,ResourceSendRequest:12,ResourceReceiveResponse:13,ResourceFinish:14,FunctionCall:15,ResourceReceiveData:16,GCEvent:17,MarkDOMContentEventType:18,MarkLoadEventType:19,ScheduleResourceRequest:20};

@@ -25,17 +25,4 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.ResourceCategory = function(name, title, color)
-{
-    this.name = name;
-    this.title = title;
-    this.color = color;
-}
-
-WebInspector.ResourceCategory.prototype = {
-    toString: function()
-    {
-        return this.title;
-    }
-}
+WebInspector.ResourceCategory=function(t,e,o){this.name=t,this.title=e,this.color=o},WebInspector.ResourceCategory.prototype={toString:function(){return this.title}};

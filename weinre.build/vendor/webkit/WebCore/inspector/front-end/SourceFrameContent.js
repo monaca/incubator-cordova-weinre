@@ -27,96 +27,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.SourceFrameContent = function(text, mapping, scriptRanges)
-{
-    this._text = text;
-    this._mapping = mapping;
-    this._scriptRanges = scriptRanges;
-}
-
-WebInspector.SourceFrameContent.prototype = {
-    get text()
-    {
-        return this._text;
-    },
-
-    get scriptRanges()
-    {
-        return this._scriptRanges;
-    },
-
-    sourceFrameLineNumberToActualLocation: function(lineNumber)
-    {
-        // Script content may start right after <script> tag without new line (e.g. "<script>function f()...").
-        // In that case, column number should be equal to script column offset.
-        var columnNumber = 0;
-        for (var i = 0; i < this._scriptRanges.length; ++i) {
-            var scriptRange = this._scriptRanges[i];
-            if (scriptRange.start.lineNumber < lineNumber)
-                continue;
-            if (scriptRange.start.lineNumber === lineNumber)
-                columnNumber = scriptRange.start.columnNumber;
-            break;
-        }
-        var location = this._mapping.sourceLocationToActualLocation(lineNumber, columnNumber);
-        location.sourceID = this._sourceIDForSourceFrameLineNumber(lineNumber);
-        return location;
-    },
-
-    actualLocationToSourceFrameLineNumber: function(lineNumber, columnNumber)
-    {
-        return this._mapping.actualLocationToSourceLocation(lineNumber, columnNumber).lineNumber;
-    },
-
-    _sourceIDForSourceFrameLineNumber: function(lineNumber)
-    {
-        for (var i = 0; i < this._scriptRanges.length; ++i) {
-            var scriptRange = this._scriptRanges[i];
-            if (lineNumber < scriptRange.start.lineNumber)
-                return;
-            if (lineNumber > scriptRange.end.lineNumber)
-                continue;
-            if (lineNumber === scriptRange.end.lineNumber && !scriptRange.end.columnNumber)
-                continue;
-            return scriptRange.sourceID;
-        }
-    }
-}
-
-
-WebInspector.SourceMapping = function()
-{
-}
-
-WebInspector.SourceMapping.prototype = {
-    actualLocationToSourceLocation: function(lineNumber, columnNumber)
-    {
-        // Should be implemented by subclasses.
-    },
-
-    sourceLocationToActualLocation: function(lineNumber, columnNumber)
-    {
-        // Should be implemented by subclasses.
-    }
-}
-
-
-WebInspector.IdenticalSourceMapping = function()
-{
-    WebInspector.SourceMapping.call(this);
-}
-
-WebInspector.IdenticalSourceMapping.prototype = {
-    actualLocationToSourceLocation: function(lineNumber, columnNumber)
-    {
-        return { lineNumber: lineNumber, columnNumber: columnNumber};
-    },
-
-    sourceLocationToActualLocation: function(lineNumber, columnNumber)
-    {
-        return { lineNumber: lineNumber, columnNumber: columnNumber};
-    }
-}
-
-WebInspector.IdenticalSourceMapping.prototype.__proto__ = WebInspector.SourceMapping.prototype;
+WebInspector.SourceFrameContent=function(e,t,o){this._text=e,this._mapping=t,this._scriptRanges=o},WebInspector.SourceFrameContent.prototype={get text(){return this._text},get scriptRanges(){return this._scriptRanges},sourceFrameLineNumberToActualLocation:function(e){for(
+// Script content may start right after <script> tag without new line (e.g. "<script>function f()...").
+// In that case, column number should be equal to script column offset.
+var t=0,o=0;o<this._scriptRanges.length;++o){var r=this._scriptRanges[o];if(!(r.start.lineNumber<e)){r.start.lineNumber===e&&(t=r.start.columnNumber);break}}var n=this._mapping.sourceLocationToActualLocation(e,t);return n.sourceID=this._sourceIDForSourceFrameLineNumber(e),n},actualLocationToSourceFrameLineNumber:function(e,t){return this._mapping.actualLocationToSourceLocation(e,t).lineNumber},_sourceIDForSourceFrameLineNumber:function(e){for(var t=0;t<this._scriptRanges.length;++t){var o=this._scriptRanges[t];if(e<o.start.lineNumber)return;if(!(e>o.end.lineNumber)&&(e!==o.end.lineNumber||o.end.columnNumber))return o.sourceID}}},WebInspector.SourceMapping=function(){},WebInspector.SourceMapping.prototype={actualLocationToSourceLocation:function(e,t){
+// Should be implemented by subclasses.
+},sourceLocationToActualLocation:function(e,t){
+// Should be implemented by subclasses.
+}},WebInspector.IdenticalSourceMapping=function(){WebInspector.SourceMapping.call(this)},WebInspector.IdenticalSourceMapping.prototype={actualLocationToSourceLocation:function(e,t){return{lineNumber:e,columnNumber:t}},sourceLocationToActualLocation:function(e,t){return{lineNumber:e,columnNumber:t}}},WebInspector.IdenticalSourceMapping.prototype.__proto__=WebInspector.SourceMapping.prototype;

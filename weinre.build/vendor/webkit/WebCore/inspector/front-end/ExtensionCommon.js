@@ -27,20 +27,4 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.commonExtensionSymbols = function(apiPrivate)
-{
-    
-    if (!apiPrivate.audits)
-        apiPrivate.audits = {};
-
-    apiPrivate.audits.Severity = {
-        Info: "info",
-        Warning: "warning",
-        Severe: "severe"
-    };
-}
-
-WebInspector.extensionAPI = {};
-
-WebInspector.commonExtensionSymbols(WebInspector.extensionAPI);
+WebInspector.commonExtensionSymbols=function(e){e.audits||(e.audits={}),e.audits.Severity={Info:"info",Warning:"warning",Severe:"severe"}},WebInspector.extensionAPI={},WebInspector.commonExtensionSymbols(WebInspector.extensionAPI);
