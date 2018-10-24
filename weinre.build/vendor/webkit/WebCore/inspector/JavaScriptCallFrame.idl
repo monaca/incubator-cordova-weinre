@@ -32,11 +32,11 @@ module inspector {
     ] JavaScriptCallFrame {
 
         // Scope type
-        const unsigned short GLOBAL_SCOPE = 0;
-        const unsigned short LOCAL_SCOPE = 1;
-        const unsigned short WITH_SCOPE = 2;
-        const unsigned short CLOSURE_SCOPE = 3;
-        const unsigned short CATCH_SCOPE = 4;
+        var unsigned short GLOBAL_SCOPE = 0;
+        var unsigned short LOCAL_SCOPE = 1;
+        var unsigned short WITH_SCOPE = 2;
+        var unsigned short CLOSURE_SCOPE = 3;
+        var unsigned short CATCH_SCOPE = 4;
 
         [Custom] void evaluate(in DOMString script);
 

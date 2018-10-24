@@ -4,8 +4,8 @@
   "description": "Monaca IDE Debug Panel",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "grunt"
+    "prebuild": "rm -rf weinre.build weinre.web; cp -R weinre.build-src weinre.build; cp -R weinre.web-src weinre.web; grunt;",
+    "build": "docker build -t weinre-server ."
   },
   "repository": {
     "type": "git",
