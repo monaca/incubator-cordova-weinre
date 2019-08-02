@@ -1,4 +1,4 @@
-From library/debian:wheezy
+From library/debian:stretch
 
 # Use bash instead of sh
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
