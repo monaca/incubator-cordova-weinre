@@ -28,22 +28,4 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.Breakpoint = function(id, url, sourceID, lineNumber, columnNumber, condition, enabled)
-{
-    this.id = id;
-    this.url = url;
-    this.sourceID = sourceID;
-    this.lineNumber = lineNumber;
-    this.columnNumber = columnNumber;
-    this.condition = condition;
-    this.enabled = enabled;
-    this.locations = [];
-}
-
-WebInspector.Breakpoint.prototype = {
-    addLocation: function(sourceID, lineNumber, columnNumber)
-    {
-        this.locations.push({ sourceID: sourceID, lineNumber: lineNumber, columnNumber: columnNumber });
-    }
-}
+WebInspector.Breakpoint=function(i,t,o,n,e,s,c){this.id=i,this.url=t,this.sourceID=o,this.lineNumber=n,this.columnNumber=e,this.condition=s,this.enabled=c,this.locations=[]},WebInspector.Breakpoint.prototype={addLocation:function(i,t,o){this.locations.push({sourceID:i,lineNumber:t,columnNumber:o})}};

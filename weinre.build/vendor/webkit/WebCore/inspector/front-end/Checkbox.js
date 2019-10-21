@@ -22,42 +22,4 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.Checkbox = function(label, className, tooltip)
-{
-    this.element = document.createElement('label');
-    this._inputElement = document.createElement('input');
-    this._inputElement.type = "checkbox";
-
-    this.element.className = className;
-    this.element.appendChild(this._inputElement);
-    this.element.appendChild(document.createTextNode(label));
-    if (tooltip)
-        this.element.title = tooltip;
-}
-
-WebInspector.Checkbox.prototype = {
-    set checked(checked)
-    {
-        this._inputElement.checked = checked;
-    },
-
-    get checked()
-    {
-        return this._inputElement.checked;
-    },
-
-    addEventListener: function(listener)
-    {
-        function listenerWrapper(event)
-        {
-            if (listener)
-                listener(event);
-            event.stopPropagation();
-            return true;
-        }
-
-        this._inputElement.addEventListener("click", listenerWrapper, false);
-        this.element.addEventListener("click", listenerWrapper, false);
-    }
-}
+WebInspector.Checkbox=function(e,t,n){this.element=document.createElement("label"),this._inputElement=document.createElement("input"),this._inputElement.type="checkbox",this.element.className=t,this.element.appendChild(this._inputElement),this.element.appendChild(document.createTextNode(e)),n&&(this.element.title=n)},WebInspector.Checkbox.prototype={set checked(e){this._inputElement.checked=e},get checked(){return this._inputElement.checked},addEventListener:function(t){function e(e){return t&&t(e),e.stopPropagation(),!0}this._inputElement.addEventListener("click",e,!1),this.element.addEventListener("click",e,!1)}};

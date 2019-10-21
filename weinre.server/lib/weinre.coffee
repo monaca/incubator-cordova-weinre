@@ -22,9 +22,10 @@ net  = require 'net'
 dns  = require 'dns'
 path = require 'path'
 
-_       = require 'underscore'
-express = require 'express'
-https   = require 'https'
+_           = require 'underscore'
+express     = require 'express'
+compression = require 'compression'
+https       = require 'https'
 
 utils              = require './utils'
 jsonBodyParser     = require './jsonBodyParser'
@@ -148,6 +149,7 @@ startServer = () ->
     #    socket.setKeepAlive true, 10 * 1000
 
     app.use express.favicon(favIcon)
+    app.use compression()
 
     app.use jsonBodyParser()
 

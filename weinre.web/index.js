@@ -16,88 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-var weinre_protocol = location.protocol
-var weinre_host     = location.hostname
-var weinre_port     = location.port
-var weinre_pathname = location.pathname
-var weinre_id       = "anonymous"
-
-var hash = location.href.split("#")[1]
-if (hash) {
-    weinre_id = hash
-}
-
-replaceURL("url-client-ui",              buildHttpURL("client/#" + weinre_id))
-replaceURL("url-interfaces",             buildHttpURL("interfaces/interfaces.html"))
-replaceURL("url-target-demo",            buildHttpURL("demo/weinre-demo.html#" + weinre_id))
-replaceURL("url-target-demo-min",        buildHttpURL("demo/weinre-demo-min.html#" + weinre_id))
-replaceURL("url-target-script",          buildHttpURL("target/target-script-min.js#" + weinre_id))
-replaceURL("url-target-bookmarklet",     getTargetBookmarklet(), "weinre target debug")
-replaceURL("url-target-documentation",   buildHttpURL("doc/"))
-
-replaceText("version-weinre",    Weinre.Versions.weinre)
-replaceText("version-build",     Weinre.Versions.build)
-
-replaceText("target-bookmarklet-src-pre",       getTargetBookmarklet())
-replaceText("target-bookmarklet-src-text-area", getTargetBookmarklet())
-
-replaceText("url-target-script-raw",  buildHttpURL("target/target-script-min.js#" + weinre_id))
-
+var weinre_protocol=location.protocol,weinre_host=location.hostname,weinre_port=location.port,weinre_pathname=location.pathname,weinre_id="anonymous",hash=location.href.split("#")[1];
 //---------------------------------------------------------------------
-function buildHttpURL(uri) {
-    var port     = weinre_port
-    var pathname = weinre_pathname
-
-    if (pathname == "/index.html") pathname = "/"
-
-    if (weinre_protocol == "file:") {
-        return uri
-    }
-
-    else if (weinre_protocol == "http:") {
-        if (port != "") port = ":" + port
-
-        return weinre_protocol + "//" + weinre_host + port + pathname + uri
-    }
-
-    else if (weinre_protocol == "https:") {
-        if (port != "") port = ":" + port
-
-        return weinre_protocol + "//" + weinre_host + port + pathname + uri
-    }
-}
-
+function buildHttpURL(e){var t=weinre_port,r=weinre_pathname;return"/index.html"==r&&(r="/"),"file:"==weinre_protocol?e:"http:"==weinre_protocol?(""!=t&&(t=":"+t),weinre_protocol+"//"+weinre_host+t+r+e):"https:"==weinre_protocol?(""!=t&&(t=":"+t),weinre_protocol+"//"+weinre_host+t+r+e):void 0}
 //-----------------------------------------------------------------------------
-function targetBookmarkletFunction(e){
-    e.setAttribute("src","???");
-    document.getElementsByTagName("body")[0].appendChild(e);
-}
-
+function targetBookmarkletFunction(e){e.setAttribute("src","???"),document.getElementsByTagName("body")[0].appendChild(e)}
 //-----------------------------------------------------------------------------
-function getTargetBookmarklet() {
-    var script = targetBookmarkletFunction.toString();
-    script = script.replace(/\n/g,   "")
-    script = script.replace("targetBookmarkletFunction","")
-    script = script.replace(/\s*/g, "")
-    script = script.replace("???", buildHttpURL("target/target-script-min.js#" + weinre_id))
-    script = "(" + script + ')(document.createElement("script"));void(0);'
-    return 'javascript:' + script
-}
-
+function getTargetBookmarklet(){var e=targetBookmarkletFunction.toString();return"javascript:"+(e="("+(e=(e=(e=(e=e.replace(/\n/g,"")).replace("targetBookmarkletFunction","")).replace(/\s*/g,"")).replace("???",buildHttpURL("target/target-script-min.js#"+weinre_id)))+')(document.createElement("script"));void(0);')}
 //---------------------------------------------------------------------
-function replaceURL(id, url, linkText) {
-    if (!linkText) linkText = url
-    replaceText(id, "<a href='" + url + "'>" + linkText + "</a>");
-}
-
+function replaceURL(e,t,r){r||(r=t),replaceText(e,"<a href='"+t+"'>"+r+"</a>")}
 //---------------------------------------------------------------------
-function replaceText(id, text) {
-    var element = document.getElementById(id)
-    if (null == element) {
-//      alert("error: can't find element with id '" + id + "'")
-        return
-    }
-
-    element.innerHTML = text
-}
+function replaceText(e,t){var r=document.getElementById(e);null!=r&&(r.innerHTML=t)}hash&&(weinre_id=hash),replaceURL("url-client-ui",buildHttpURL("client/#"+weinre_id)),replaceURL("url-interfaces",buildHttpURL("interfaces/interfaces.html")),replaceURL("url-target-demo",buildHttpURL("demo/weinre-demo.html#"+weinre_id)),replaceURL("url-target-demo-min",buildHttpURL("demo/weinre-demo-min.html#"+weinre_id)),replaceURL("url-target-script",buildHttpURL("target/target-script-min.js#"+weinre_id)),replaceURL("url-target-bookmarklet",getTargetBookmarklet(),"weinre target debug"),replaceURL("url-target-documentation",buildHttpURL("doc/")),replaceText("version-weinre",Weinre.Versions.weinre),replaceText("version-build",Weinre.Versions.build),replaceText("target-bookmarklet-src-pre",getTargetBookmarklet()),replaceText("target-bookmarklet-src-text-area",getTargetBookmarklet()),replaceText("url-target-script-raw",buildHttpURL("target/target-script-min.js#"+weinre_id));

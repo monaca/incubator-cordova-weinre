@@ -16,5 +16,4 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-eval(window.top.installWebInspectorAPIsource())
+eval(window.top.installWebInspectorAPIsource());

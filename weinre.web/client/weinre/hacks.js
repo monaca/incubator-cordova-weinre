@@ -16,36 +16,5 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // a place for hacks
-
-;(function(){
-
-var version = navigator.appVersion.match(/^.*Chrome\/(\d+)\..*$/)
-if (!version) return
-
-version = parseInt(version[1])
-if (version <= 26) return
-
-setTimeout(fixToolbarItem, 1000)
-
-function fixToolbarItem() {
-    var toolbarItems = document.querySelectorAll(".toolbar-item.toggleable")
-
-    for (var i=0; i<toolbarItems.length; i++) {
-        var style = toolbarItems[i].style
-        if (style.display != "none") {
-            toolbarItems[i].style.display = "inline-block"
-        }
-    }
-}
-
-})();
-
-
-document.addEventListener('mousedown', function(e) {
-  if(e.button === 1) {
-    e.preventDefault();
-    return false;
-  }
-});
+!function(){var e=navigator.appVersion.match(/^.*Chrome\/(\d+)\..*$/);e&&((e=parseInt(e[1]))<=26||setTimeout(function(){for(var e=document.querySelectorAll(".toolbar-item.toggleable"),t=0;t<e.length;t++){var n=e[t].style;"none"!=n.display&&(e[t].style.display="inline-block")}},1e3))}(),document.addEventListener("mousedown",function(e){if(1===e.button)return e.preventDefault(),!1});

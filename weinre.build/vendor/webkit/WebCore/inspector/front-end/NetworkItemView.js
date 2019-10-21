@@ -27,65 +27,8 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.NetworkItemView = function(resource)
-{
-    WebInspector.View.call(this);
-
-    this.element.addStyleClass("network-item-view");
-
-    this._headersView = new WebInspector.ResourceHeadersView(resource);
-    // Do not store reference to content view - it can be recreated.
-    var contentView = WebInspector.ResourceView.resourceViewForResource(resource);
-
-    this._tabbedPane = new WebInspector.TabbedPane(this.element);
-    this._tabbedPane.appendTab("headers", WebInspector.UIString("Headers"), this._headersView);
-    if (contentView.hasContent()) {
-        // Reusing this view, so hide it at first.
-        contentView.visible = false;
-        this._tabbedPane.appendTab("content", WebInspector.UIString("Content"), contentView);
-    }
-    if (Preferences.showCookiesTab) {
-        this._cookiesView = new WebInspector.ResourceCookiesView(resource);
-        this._tabbedPane.appendTab("cookies", WebInspector.UIString("Cookies"), this._cookiesView);
-    }
-    if (Preferences.showTimingTab) {
-        var timingView = new WebInspector.ResourceTimingView(resource);
-        this._tabbedPane.appendTab("timing", WebInspector.UIString("Timing"), timingView);
-    }
-
-    this._tabbedPane.addEventListener("tab-selected", this._tabSelected, this);
-}
-
-WebInspector.NetworkItemView.prototype = {
-    show: function(parentElement)
-    {
-        WebInspector.View.prototype.show.call(this, parentElement);
-        this._selectTab();
-    },
-
-    _selectTab: function(tabId)
-    {
-        if (!tabId)
-            tabId = WebInspector.settings.resourceViewTab;
-
-        if (!this._tabbedPane.selectTab(tabId)) {
-            this._isInFallbackSelection = true;
-            this._tabbedPane.selectTab("headers");
-            delete this._isInFallbackSelection;
-        }
-    },
-
-    _tabSelected: function(event)
-    {
-        WebInspector.settings.resourceViewTab = event.data.tabId;
-    },
-
-    resize: function()
-    {
-        if (this._cookiesView && this._cookiesView.visible)
-            this._cookiesView.resize();
-    }
-}
-
-WebInspector.NetworkItemView.prototype.__proto__ = WebInspector.View.prototype;
+WebInspector.NetworkItemView=function(e){WebInspector.View.call(this),this.element.addStyleClass("network-item-view"),this._headersView=new WebInspector.ResourceHeadersView(e);
+// Do not store reference to content view - it can be recreated.
+var t=WebInspector.ResourceView.resourceViewForResource(e);if(this._tabbedPane=new WebInspector.TabbedPane(this.element),this._tabbedPane.appendTab("headers",WebInspector.UIString("Headers"),this._headersView),t.hasContent()&&(
+// Reusing this view, so hide it at first.
+t.visible=!1,this._tabbedPane.appendTab("content",WebInspector.UIString("Content"),t)),Preferences.showCookiesTab&&(this._cookiesView=new WebInspector.ResourceCookiesView(e),this._tabbedPane.appendTab("cookies",WebInspector.UIString("Cookies"),this._cookiesView)),Preferences.showTimingTab){var s=new WebInspector.ResourceTimingView(e);this._tabbedPane.appendTab("timing",WebInspector.UIString("Timing"),s)}this._tabbedPane.addEventListener("tab-selected",this._tabSelected,this)},WebInspector.NetworkItemView.prototype={show:function(e){WebInspector.View.prototype.show.call(this,e),this._selectTab()},_selectTab:function(e){e||(e=WebInspector.settings.resourceViewTab),this._tabbedPane.selectTab(e)||(this._isInFallbackSelection=!0,this._tabbedPane.selectTab("headers"),delete this._isInFallbackSelection)},_tabSelected:function(e){WebInspector.settings.resourceViewTab=e.data.tabId},resize:function(){this._cookiesView&&this._cookiesView.visible&&this._cookiesView.resize()}},WebInspector.NetworkItemView.prototype.__proto__=WebInspector.View.prototype;

@@ -25,42 +25,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.PropertiesSidebarPane = function()
-{
-    WebInspector.SidebarPane.call(this, WebInspector.UIString("Properties"));
-}
-
-WebInspector.PropertiesSidebarPane.prototype = {
-    update: function(node)
-    {
-        var body = this.bodyElement;
-
-        if (!node) {
-            body.removeChildren();
-            this.sections = [];
-            return;
-        }
-
-        function callback(prototypes)
-        {
-            var body = this.bodyElement;
-            body.removeChildren();
-            this.sections = [];
-
-            // Get array of prototype user-friendly names.
-            for (var i = 0; i < prototypes.length; ++i) {
-                var prototype = WebInspector.RemoteObject.fromPayload(prototypes[i]);
-                var title = prototype.description;
-                if (title.match(/Prototype$/))
-                    title = title.replace(/Prototype$/, "");
-                var section = new WebInspector.ObjectPropertiesSection(prototype, title);
-                this.sections.push(section);
-                body.appendChild(section.element);
-            }
-        }
-        InspectorBackend.getNodePrototypes(node.id, callback.bind(this));
-    }
-}
-
-WebInspector.PropertiesSidebarPane.prototype.__proto__ = WebInspector.SidebarPane.prototype;
+WebInspector.PropertiesSidebarPane=function(){WebInspector.SidebarPane.call(this,WebInspector.UIString("Properties"))},WebInspector.PropertiesSidebarPane.prototype={update:function(e){var t=this.bodyElement;if(!e)return t.removeChildren(),void(this.sections=[]);InspectorBackend.getNodePrototypes(e.id,function(e){var t=this.bodyElement;t.removeChildren(),this.sections=[];
+// Get array of prototype user-friendly names.
+for(var r=0;r<e.length;++r){var o=WebInspector.RemoteObject.fromPayload(e[r]),n=o.description;n.match(/Prototype$/)&&(n=n.replace(/Prototype$/,""));var i=new WebInspector.ObjectPropertiesSection(o,n);this.sections.push(i),t.appendChild(i.element)}}.bind(this))}},WebInspector.PropertiesSidebarPane.prototype.__proto__=WebInspector.SidebarPane.prototype;

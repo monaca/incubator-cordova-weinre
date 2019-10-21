@@ -16,15 +16,24 @@
  * specific language governing permissions and limitations
  * under the License.
 -->
+Installation
+----------------------
+```
+git clone git@github.com:monaca/incubator-cordova-weinre.git
+cd incubator-cordova-weinre;
+npm i;
+```
 
 How to Use With Monaca
 ----------------------
 For development, after you make changes, run this command to build a new docker container:
 ```
-docker build -t weinre-server .
+npm run build
 ```
 
-Then we need to stop the currently running container:
+This will run `grunt` which minifies the css and uglifies the javascript files of `weinre.web-src` and `weinre.build-src` into `weinre.web` and `weinre.build` respectively. Then it will build the docker image.
+
+To stop the currently running container, we can run:
 ```
 docker stop weinre-server
 ```
@@ -76,6 +85,17 @@ that weinre uses, and holds the output of the build
 
 * `weinre.web` - code for the client and target pieces of weinre
 
+### Generating `weinre.build` and `weinre.web` ###
+
+To generate (as well as perform the javascript/css minification), we have created the following subdirectories:
+
+* `weinre.web-src.backup` - a backup of original source code as of `2018/10/24`
+
+* `weinre.build-src.backup` - a backup of original source code as of `2018/10/24`
+
+* `weinre.web-src` - modified source codes needed for minification process
+
+* `weinre.build-src` - modified source codes needed for minification process
 
 building weinre
 ---------------

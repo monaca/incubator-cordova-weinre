@@ -16,8 +16,4 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-(function() {
-    var ExtensionRegistryImpl = modjewel.require("weinre/client/ExtensionRegistryImpl")
-    window.InspectorExtensionRegistry = new ExtensionRegistryImpl()
-})()
+!function(){var e=modjewel.require("weinre/client/ExtensionRegistryImpl");window.InspectorExtensionRegistry=new e}();

@@ -26,19 +26,4 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.PropertiesSection = function(title, subtitle)
-{
-    WebInspector.Section.call(this, title, subtitle);
-
-    this.headerElement.addStyleClass("monospace");
-    this.propertiesElement = document.createElement("ol");
-    this.propertiesElement.className = "properties properties-tree monospace";
-    this.propertiesElement.tabIndex = 0;
-    this.propertiesTreeOutline = new TreeOutline(this.propertiesElement);
-    this.propertiesTreeOutline.section = this;
-
-    this.element.appendChild(this.propertiesElement);
-}
-
-WebInspector.PropertiesSection.prototype.__proto__ = WebInspector.Section.prototype;
+WebInspector.PropertiesSection=function(e,t){WebInspector.Section.call(this,e,t),this.headerElement.addStyleClass("monospace"),this.propertiesElement=document.createElement("ol"),this.propertiesElement.className="properties properties-tree monospace",this.propertiesElement.tabIndex=0,this.propertiesTreeOutline=new TreeOutline(this.propertiesElement),(this.propertiesTreeOutline.section=this).element.appendChild(this.propertiesElement)},WebInspector.PropertiesSection.prototype.__proto__=WebInspector.Section.prototype;

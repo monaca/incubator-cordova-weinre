@@ -22,104 +22,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-WebInspector.Script = function(sourceID, sourceURL, source, lineOffset, columnOffset, length, errorLine, errorMessage, worldType)
-{
-    this.sourceID = sourceID;
-    this.sourceURL = sourceURL;
-    this._source = source;
-    this.lineOffset = lineOffset;
-    this.columnOffset = columnOffset;
-    this.length = length;
-    this.errorLine = errorLine;
-    this.errorMessage = errorMessage;
-    this.worldType = worldType;
-
-    // if no URL, look for "//@ sourceURL=" decorator
-    // note that this sourceURL comment decorator is behavior that FireBug added
-    // in it's 1.1 release as noted in the release notes:
-    // http://fbug.googlecode.com/svn/branches/firebug1.1/docs/ReleaseNotes_1.1.txt
-    if (!sourceURL) {
-        // use of [ \t] rather than \s is to prevent \n from matching
-        var pattern = /^\s*\/\/[ \t]*@[ \t]*sourceURL[ \t]*=[ \t]*(\S+).*$/m;
-        var match = pattern.exec(source);
-
-        if (match)
-            this.sourceURL = match[1];
-    }
-}
-
-WebInspector.Script.WorldType = {
-    MAIN_WORLD: 0,
-    EXTENSIONS_WORLD: 1
-}
-
-WebInspector.Script.WorldType = {
-    MAIN_WORLD: 0,
-    EXTENSIONS_WORLD: 1
-}
-
-WebInspector.Script.prototype = {
-    get startingLine()
-    {
-        return this.lineOffset + 1;
-    },
-
-    get linesCount()
-    {
-        if (!this.source)
-            return 0;
-        if (!this._lineEndings)
-            this._lineEndings = this._source.findAll("\n");
-        return this._lineEndings.length + 1;
-    },
-
-    sourceLine: function(lineNumber, callback)
-    {
-        function extractSourceLine()
-        {
-            lineNumber -= this.lineOffset;
-            callback(this._source.substring(this._lineEndings[lineNumber - 1], this._lineEndings[lineNumber]));
-        }
-
-        if (this._lineEndings) {
-            extractSourceLine.call(this);
-            return;
-        }
-
-        function didRequestSource()
-        {
-            this._lineEndings = this._source.findAll("\n");
-            extractSourceLine.call(this);
-        }
-        this.requestSource(didRequestSource.bind(this));
-    },
-
-    get source()
-    {
-        if (!this._source && this.resource)
-            this._source = this.resource.content;
-        return this._source;
-    },
-
-    set source(source)
-    {
-        this._source = source;
-        delete this._lineEndings;
-    },
-
-    requestSource: function(callback)
-    {
-        if (this._source) {
-            callback(this._source);
-            return;
-        }
-
-        function didGetScriptSource(source)
-        {
-            this._source = source;
-            callback(this._source);
-        }
-        InspectorBackend.getScriptSource(this.sourceID, didGetScriptSource.bind(this));
-    }
-}
+WebInspector.Script=function(s,e,t,i,n,r,c,o,h){
+// if no URL, look for "//@ sourceURL=" decorator
+// note that this sourceURL comment decorator is behavior that FireBug added
+// in it's 1.1 release as noted in the release notes:
+// http://fbug.googlecode.com/svn/branches/firebug1.1/docs/ReleaseNotes_1.1.txt
+if(this.sourceID=s,this.sourceURL=e,this._source=t,this.lineOffset=i,this.columnOffset=n,this.length=r,this.errorLine=c,this.errorMessage=o,this.worldType=h,!e){
+// use of [ \t] rather than \s is to prevent \n from matching
+var u=/^\s*\/\/[ \t]*@[ \t]*sourceURL[ \t]*=[ \t]*(\S+).*$/m.exec(t);u&&(this.sourceURL=u[1])}},WebInspector.Script.WorldType={MAIN_WORLD:0,EXTENSIONS_WORLD:1},WebInspector.Script.WorldType={MAIN_WORLD:0,EXTENSIONS_WORLD:1},WebInspector.Script.prototype={get startingLine(){return this.lineOffset+1},get linesCount(){return this.source?(this._lineEndings||(this._lineEndings=this._source.findAll("\n")),this._lineEndings.length+1):0},sourceLine:function(s,e){function t(){s-=this.lineOffset,e(this._source.substring(this._lineEndings[s-1],this._lineEndings[s]))}this._lineEndings?t.call(this):this.requestSource(function(){this._lineEndings=this._source.findAll("\n"),t.call(this)}.bind(this))},get source(){return!this._source&&this.resource&&(this._source=this.resource.content),this._source},set source(s){this._source=s,delete this._lineEndings},requestSource:function(e){this._source?e(this._source):InspectorBackend.getScriptSource(this.sourceID,function(s){this._source=s,e(this._source)}.bind(this))}};
